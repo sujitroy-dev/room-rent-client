@@ -1,0 +1,124 @@
+.header {
+  background: #146c94;
+  color: #fff;
+  box-shadow: 0 0 5px #00000042;
+  padding: 25px;
+  &__wrapper {
+    display: flex;
+    max-width: var(--max-width);
+    margin: auto;
+    align-items: center;
+  }
+  &__logo {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-right: 160px;
+  }
+  &__search {
+    width: 700px;
+    display: flex;
+    align-items: center;
+    border: 1px solid white;
+    margin-right: 120px;
+    border-radius: 10px;
+    overflow: hidden;
+    input {
+      width: inherit;
+      height: inherit;
+      border: none;
+      padding: 10px 15px;
+      outline: none;
+      font-size: 1rem;
+    }
+    .search-icon {
+      width: 45px;
+      padding: 0 8px;
+      cursor: pointer;
+      color: white;
+    }
+  }
+  &__search--tablet {
+    display: none;
+  }
+  .cta-container {
+    display: flex;
+    align-items: center;
+    .registier-login {
+      margin-right: 50px;
+      a {
+        font-weight: 500;
+      }
+    }
+    .wishlist-icon {
+      cursor: pointer;
+    }
+    .user-icon{
+        cursor: pointer;
+        border: 1px solid white;
+        border-radius: 50%;
+        padding-top: 7px;
+    }
+  }
+  &__search-wrapper {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .header {
+    &__wrapper {
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &__logo {
+      margin: 0;
+    }
+    &__search--desktop {
+      display: none;
+    }
+    &__search--tablet {
+      display: flex;
+      width: 100%;
+      margin: 0;
+    }
+    &__search-wrapper {
+      display: flex;
+      align-items: center;
+      .wishlist-icon {
+        display: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .header {
+    &__logo {
+      font-size: 1.6rem;
+    }
+    .cta-container {
+      .registier-login {
+        margin-right: 0;
+      }
+      .wishlist-icon {
+        display: none;
+      }
+    }
+    &__search-wrapper {
+      display: flex;
+      align-items: center;
+      grid-gap: 15px;
+      a {
+        padding: 7px;
+        border: 1px solid;
+        border-radius: 10px;
+        display: flex;
+        .wishlist-icon {
+          display: block;
+        }
+      }
+    }
+  }
+}
