@@ -1,0 +1,33 @@
+.rooms {
+  padding: 40px 0;
+}
+.title {
+  max-width: var(--max-width);
+  margin: auto;
+  margin-bottom: 35px;
+}
+.rooms__container {
+  max-width: var(--max-width);
+  margin: auto;
+  position: relative;
+}
+.prev-slide-btn,
+.next-slide-btn {
+  width: 55px;
+  border: 1px solid black;
+  border-radius: 50%;
+  position: absolute;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  top: 164px;
+  cursor: pointer;
+}
+.prev-slide-btn {
+  left: -55px;
+}
+.next-slide-btn {
+  right: -55px;
+}
