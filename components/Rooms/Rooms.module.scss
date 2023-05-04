@@ -31,3 +31,20 @@
 .next-slide-btn {
   right: -55px;
 }
+
+@media screen and (max-width: 1439px) {
+  .title,
+  .rooms__container {
+    max-width: 80%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .title,
+  .rooms__container {
+    max-width: 90%;
+  }
+  .prev-slide-btn,
+  .next-slide-btn {
+    display: none;
+  }
+}
