@@ -5,7 +5,7 @@ import { GoSearch } from "react-icons/go";
 import { AiFillHeart } from "react-icons/ai";
 import { RiUser6Fill } from 'react-icons/ri';
 
-export default function Header() {
+export default function Header({search}) {
   const [searchValue, setSearchValue] = useState("");
   const isLoggedIn = false;
   const inputRef = useRef(null);
@@ -70,7 +70,6 @@ export default function Header() {
         >
           <input
             type="text"
-            ref={inputRef}
             placeholder="search area name..."
             onChange={handleSearchChange}
           />

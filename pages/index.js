@@ -1,8 +1,16 @@
+import { useRef, useState } from "react";
+import styles from "./index.module.scss";
 import Head from "next/head";
-import Header from "@/components/Header/Header";
-import MainLayout from "@/layouts/MainLayout/MainLayout";
+import WithoutSearchLayout from "@/layouts/WithoutSearchLayout/WithoutSearchLayout";
+import { GoSearch } from "react-icons/go";
+import Rooms from "@/components/Rooms/Rooms";
 
 export default function Home() {
+  const inputRef = useRef("");
+  const [searchInput, setSearchInput] = useState("");
+  function handleSearchSubmit() {
+    console.log(searchInput);
+  }
   return (
     <>
       <Head>
@@ -12,9 +20,29 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <MainLayout>
-          <h1>Home Page</h1>
-        </MainLayout>
+        <WithoutSearchLayout>
+          <section className={styles["hero-section"]}>
+            <h2 className={styles["hero-section__title"]}>
+              Find Perfect Room for free
+            </h2>
+            <from className={styles['search']} onSubmit={handleSearchSubmit}>
+              <input
+                type="text"
+                ref={inputRef}
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                placeholder="Search..."
+              />
+              <button type="submit" onClick={handleSearchSubmit}>
+                <GoSearch
+                  size="35px"
+                  className={styles["search-icon"]}
+                />
+              </button>
+            </from>
+          </section>
+          <Rooms header="Recently Uploaded"/>
+        </WithoutSearchLayout>
       </main>
     </>
   );

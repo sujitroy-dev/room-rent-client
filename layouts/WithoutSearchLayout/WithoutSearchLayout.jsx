@@ -1,8 +1,8 @@
 import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
+import HeaderWithoutSearch from "@/components/HeaderWithoutSearch/HeaderWithoutSearch";
 import Head from "next/head";
 
-export default function MainLayout({ children }) {
+export default function WithoutSearchLayout({ children }) {
   return (
     <>
       <Head>
@@ -21,7 +21,7 @@ export default function MainLayout({ children }) {
       <div
         style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
       >
-        <Header />
+        <HeaderWithoutSearch />
         <main style={{ flex: 1 }}>{children}</main>
         <Footer />
       </div>
