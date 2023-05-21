@@ -4,6 +4,7 @@ import Head from "next/head";
 import WithoutSearchLayout from "@/layouts/WithoutSearchLayout/WithoutSearchLayout";
 import { GoSearch } from "react-icons/go";
 import Rooms from "@/components/Rooms/Rooms";
+import ListYourProperty from "@/components/ListYourProperty/ListYourProperty";
 
 export default function Home() {
   const inputRef = useRef("");
@@ -41,9 +42,14 @@ export default function Home() {
               </button>
             </from>
           </section>
-          <Rooms header="Recently Uploaded"/>
+          <Rooms header="Recently Listed"/>
+          <ListYourProperty/>
         </WithoutSearchLayout>
+
       </main>
     </>
   );
 }
+
+//todo: testimonials
+//todo: qna

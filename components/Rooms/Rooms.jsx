@@ -8,6 +8,7 @@ import property3 from "@/assets/properties/property3.jpg";
 import property4 from "@/assets/properties/property4.jpg";
 import property5 from "@/assets/properties/property5.jpg";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
+import Link from "next/link";
 
 const rooms = [
   {
@@ -70,7 +71,7 @@ const settings = {
   dots: false,
   infinite: false,
   speed: 500,
-  slidesToShow: 3.7,
+  slidesToShow: 4,
   slidesToScroll: 1,
   responsive: [
     {
@@ -221,7 +222,7 @@ export default function Rooms({ header }) {
 
   return (
     <div className={styles.rooms}>
-      <h2 className={styles.title}>{header}</h2>
+        <h2 className={styles.title}>{header}</h2>
       <div className={styles.rooms__container}>
         <div
           className={styles["next-slide-btn"]}
