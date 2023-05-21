@@ -1,72 +1,12 @@
-import React, { useRef } from "react";
+"client side"
+import React, { useEffect, useRef } from "react";
 import Slider from "react-slick";
 import styles from "./Rooms.module.scss";
 import RoomCard from "./RoomCard/RoomCard";
-import property1 from "@/assets/properties/property1.jpg";
-import property2 from "@/assets/properties/property2.jpg";
-import property3 from "@/assets/properties/property3.jpg";
-import property4 from "@/assets/properties/property4.jpg";
-import property5 from "@/assets/properties/property5.jpg";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
-import Link from "next/link";
+import {useQuery} from 'react-query';
 
-const rooms = [
-  {
-    _id: 1,
-    title: "3 BHK Appartment in Guwahati",
-    location: "Guwahati, Assam",
-    rent: 10000,
-    currency: "INR",
-    deposit: 10000,
-    security: 10000,
-    postedTime: "Today",
-    images: property1,
-  },
-  {
-    _id: 2,
-    title: "3 BHK Appartment in Guwahati",
-    location: "Guwahati, Assam",
-    rent: 10000,
-    currency: "INR",
-    deposit: 10000,
-    security: 10000,
-    postedTime: "Today",
-    images: property2,
-  },
-  {
-    _id: 3,
-    title: "3 BHK Appartment in Guwahati",
-    location: "Guwahati, Assam",
-    rent: 10000,
-    currency: "INR",
-    deposit: 10000,
-    security: 10000,
-    postedTime: "Today",
-    images: property3,
-  },
-  {
-    _id: 4,
-    title: "3 BHK Appartment in Guwahati",
-    location: "Guwahati, Assam",
-    rent: 10000,
-    currency: "INR",
-    deposit: 10000,
-    security: 10000,
-    postedTime: "Today",
-    images: property4,
-  },
-  {
-    _id: 5,
-    title: "3 BHK Appartment in Guwahati",
-    location: "Guwahati, Assam",
-    rent: 10000,
-    currency: "INR",
-    deposit: 10000,
-    security: 10000,
-    postedTime: "Today",
-    images: property5,
-  },
-];
+
 const settings = {
   dots: false,
   infinite: false,
@@ -218,6 +158,14 @@ const settings = {
 };
 
 export default function Rooms({ header }) {
+  const fetchRecentRooms = async () => {
+		const res = await fetch('http://localhost:4000/api/room/recent');
+    return res.json();
+	};
+
+  const {data: rooms, error, isLoading} = useQuery('recent-rooms', fetchRecentRooms);
+
+  fetchRecentRooms();
   const CarouselRef = useRef(null);
 
   return (
@@ -237,16 +185,16 @@ export default function Rooms({ header }) {
           <GrLinkPrevious />
         </div>
         <Slider {...settings} ref={CarouselRef}>
-          {rooms.map((room) => (
+          {rooms?.map((room) => (
             <RoomCard
               key={room._id}
               title={room.title}
-              rent={room.rent}
+              rent={room.rent_amount}
               currency={room.currency}
               deposit={room.deposit}
-              security={room.security}
+              security={room.security_amount}
               postedTime={room.postedTime}
-              images={room.images}
+              images={room.pictures?.[0]}
               location={room.location}
             />
           ))}
