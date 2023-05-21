@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function RoomCard({title, rent, currency, deposit, security, postedTime, images, location}) {
   return (
     <div className={styles['room-card']}>
-      <Image src={images} width={175} height={175} alt={title}/>
+      <Image src={images} width={300} height={175} alt={title}/>
       <h2 className={styles.title}>{title}</h2>
       <div className={styles.info}>
         <div className={styles.price}><b>Rent:</b> ₹{rent}</div>
