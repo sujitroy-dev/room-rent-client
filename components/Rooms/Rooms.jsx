@@ -1,4 +1,3 @@
-"client side"
 import React, { useEffect, useRef } from "react";
 import Slider from "react-slick";
 import styles from "./Rooms.module.scss";
