@@ -1,12 +1,14 @@
 import "@/styles/globals.scss";
-import { QueryClient, QueryClientProvider } from "react-query";
+import {Hydrate, QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
+      <Hydrate state={pageProps.dehydratedState}>
+        <Component {...pageProps} />
+      </Hydrate>
     </QueryClientProvider>
   );
 }
