@@ -53,3 +53,14 @@
     text-decoration: underline;
     color: var(--secondary-bg);
 }
+
+@media screen and (max-width: 768px) {
+    .form__container{
+        width: 85%;
+    }
+}
+@media screen and (max-width: 420px) {
+    .form__container{
+        width: 90%;
+    }
+}

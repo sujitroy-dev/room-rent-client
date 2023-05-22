@@ -10,11 +10,7 @@ export default function RegistierForm({changeFormTypeFunc}) {
         <h2>Register</h2>
         <form onSubmit={submitRegistrationForm}>
             <label className={`${styles['full-w-label']}`}>
-                First :
-                <input type="text" name="" id="" required/>
-            </label>
-            <label className={`${styles['full-w-label']}`}>
-                Last :
+                Full Name :
                 <input type="text" name="" id="" required/>
             </label>
             <label className={`${styles['full-w-label']}`}>
