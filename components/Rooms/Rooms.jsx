@@ -3,7 +3,6 @@ import Slider from "react-slick";
 import styles from "./Rooms.module.scss";
 import RoomCard from "./RoomCard/RoomCard";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
-import {useQuery} from 'react-query';
 
 
 const settings = {
@@ -156,15 +155,7 @@ const settings = {
   ],
 };
 
-export default function Rooms({ header, apiRoute }) {
-  const fetchRecentRooms = async () => {
-		const res = await fetch(apiRoute);
-    return res.json();
-	};
-
-  const {data: rooms, error, isLoading} = useQuery('recent-rooms', fetchRecentRooms);
-
-  fetchRecentRooms();
+export default function Rooms({ header, rooms }) {
   const CarouselRef = useRef(null);
 
   return (

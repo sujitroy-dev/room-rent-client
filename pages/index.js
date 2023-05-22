@@ -3,12 +3,14 @@ import styles from "./index.module.scss";
 import Head from "next/head";
 import WithoutSearchLayout from "@/layouts/WithoutSearchLayout/WithoutSearchLayout";
 import { GoSearch } from "react-icons/go";
-import Rooms from "@/components/Rooms/Rooms";
 import ListYourProperty from "@/components/ListYourProperty/ListYourProperty";
+import RecentRooms from "@/components/Rooms/RecentRooms/RecentRooms";
+import FullFrunishedRooms from "@/components/Rooms/FullFrunishedRooms/FullFrunishedRooms";
+import SemiFrunishedRooms from "@/components/Rooms/SemiFrunishedRooms/SemiFrunishedRooms";
+import NoneFrunishedRooms from "@/components/Rooms/NoneFrunishedRooms/NoneFrunishedRooms";
 
 
 export default function Home() {
-  const recentRooms = `${process.env.API_BASE}/room/recent`
   const inputRef = useRef("");
   const [searchInput, setSearchInput] = useState("");
   function handleSearchSubmit() {
@@ -44,8 +46,11 @@ export default function Home() {
               </button>
             </from>
           </section>
-          <Rooms header="Recently Listed" apiRoute={recentRooms}/>
+          <RecentRooms/>
           <ListYourProperty/>
+          <FullFrunishedRooms/>
+          <SemiFrunishedRooms/>
+          <NoneFrunishedRooms/>
         </WithoutSearchLayout>
 
       </main>
