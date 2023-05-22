@@ -22,11 +22,11 @@ export default function RoomCard({
         <div className={styles.price}>
           <b>Rent:</b> ₹{rent}
         </div>
-        <div className={styles.deposit}>
-          <b>Deposite:</b> ₹{deposit}
-        </div>
         <div className={styles.security}>
           <b>Security:</b> ₹{security}
+        </div>
+        <div className={styles.deposit}>
+          <b>Deposite:</b> ₹{deposit}
         </div>
       </div>
       <div className={styles.location}>{location}</div>
