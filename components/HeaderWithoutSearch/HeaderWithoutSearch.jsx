@@ -4,7 +4,7 @@ import { GoSearch } from "react-icons/go";
 import { AiFillHeart } from "react-icons/ai";
 import { RiUser6Fill } from "react-icons/ri";
 
-export default function HeaderWithoutSearch() {
+export default function HeaderWithoutSearch({showLoginFunc}) {
   const isLoggedIn = false;
 
   return (
@@ -19,9 +19,9 @@ export default function HeaderWithoutSearch() {
               <AiFillHeart size="25px" className={styles["wishlist-icon"]} />
             </Link>
             {!isLoggedIn ? (
-              <Link href="/" className={styles["registier-login"]}>
+              <div className={styles["registier-login"]} onClick={showLoginFunc}>
                 Login
-              </Link>
+              </div>
             ) : (
               <RiUser6Fill size="41px" className={styles["user-icon"]} />
             )}

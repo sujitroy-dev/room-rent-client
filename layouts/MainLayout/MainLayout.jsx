@@ -1,4 +1,5 @@
 import Footer from "@/components/Footer/Footer";
+import AuthForm from "@/components/Form/Auth/Auth";
 import Header from "@/components/Header/Header";
 import Head from "next/head";
 
@@ -25,6 +26,7 @@ export default function MainLayout({ children }) {
         <main style={{ flex: 1 }}>{children}</main>
         <Footer />
       </div>
+      <AuthForm/>
     </>
   );
 }

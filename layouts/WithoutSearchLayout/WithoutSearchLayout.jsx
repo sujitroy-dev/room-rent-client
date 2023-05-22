@@ -1,8 +1,11 @@
 import Footer from "@/components/Footer/Footer";
+import AuthForm from "@/components/Form/Auth/Auth";
 import HeaderWithoutSearch from "@/components/HeaderWithoutSearch/HeaderWithoutSearch";
 import Head from "next/head";
+import { useState } from "react";
 
 export default function WithoutSearchLayout({ children }) {
+  const [isOpen, setOpen] = useState(false);
   return (
     <>
       <Head>
@@ -21,10 +24,11 @@ export default function WithoutSearchLayout({ children }) {
       <div
         style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
       >
-        <HeaderWithoutSearch />
+        <HeaderWithoutSearch showLoginFunc={()=>setOpen(true)}/>
         <main style={{ flex: 1 }}>{children}</main>
         <Footer />
       </div>
+      <AuthForm open={isOpen} setOpenFun={setOpen}/>
     </>
   );
 }
