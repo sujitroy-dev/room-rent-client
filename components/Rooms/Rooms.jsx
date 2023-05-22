@@ -156,9 +156,9 @@ const settings = {
   ],
 };
 
-export default function Rooms({ header }) {
+export default function Rooms({ header, apiRoute }) {
   const fetchRecentRooms = async () => {
-		const res = await fetch('http://localhost:4000/api/room/recent');
+		const res = await fetch(apiRoute);
     return res.json();
 	};
 

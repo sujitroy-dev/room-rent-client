@@ -6,7 +6,9 @@ import { GoSearch } from "react-icons/go";
 import Rooms from "@/components/Rooms/Rooms";
 import ListYourProperty from "@/components/ListYourProperty/ListYourProperty";
 
+
 export default function Home() {
+  const recentRooms = `${process.env.API_BASE}/room/recent`
   const inputRef = useRef("");
   const [searchInput, setSearchInput] = useState("");
   function handleSearchSubmit() {
@@ -42,7 +44,7 @@ export default function Home() {
               </button>
             </from>
           </section>
-          <Rooms header="Recently Listed"/>
+          <Rooms header="Recently Listed" apiRoute={recentRooms}/>
           <ListYourProperty/>
         </WithoutSearchLayout>
 
