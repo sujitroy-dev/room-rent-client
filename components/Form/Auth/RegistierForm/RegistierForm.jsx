@@ -52,69 +52,72 @@ export default function RegistierForm({ changeFormTypeFunc }) {
   }
 
   return (
-    <div className={styles.form__container}>
-      <h2>Register</h2>
-      <form onSubmit={submitRegistrationForm}>
-        <label className={`${styles["full-w-label"]}`}>
-          Full Name :
-          <input
-            type="text"
-            name="input_name"
-            id="input_name"
-            required
-            value={formState.name}
-            onChange={(e) =>
-              dispatch({ type: "update_name", payload: e.target.value })
-            }
-          />
-        </label>
-        <label className={`${styles["full-w-label"]}`}>
-          Eamil :
-          <input
-            type="email"
-            name="input_email"
-            id="input_email"
-            required
-            value={formState.email}
-            onChange={(e) =>
-              dispatch({ type: "update_email", payload: e.target.value })
-            }
-          />
-        </label>
-        <label className={`${styles["full-w-label"]}`}>
-          Password :
-          <input
-            type="password"
-            name="input_password"
-            id="input_password"
-            required
-            value={formState.password}
-            onChange={(e) =>
-              dispatch({ type: "update_password", payload: e.target.value })
-            }
-          />
-        </label>
-        <label className={`${styles["full-w-label"]}`}>
-          Selete Account Type :
-          <select
-          value={formState.user_type}
-            onChange={(e) =>
-              dispatch({ type: "update_account_type", payload: e.target.value })
-            }
-          >
-            <option value="customer">Customer</option>
-            <option value="landlord">Landlord</option>
-            <option value="agent">Agent</option>
-          </select>
-        </label>
-        <button type="submit" className={`${styles["full-w-label"]}`}>
-          Submit
-        </button>
-      </form>
-      <p className={styles["more-actions"]}>
-        Already Registiered?{" "}
-        <span onClick={() => changeFormTypeFunc("login")}>Login</span>
-      </p>
-    </div>
+      <div className={styles.form__container}>
+        <h2>Register</h2>
+        <form onSubmit={submitRegistrationForm}>
+          <label className={`${styles["full-w-label"]}`}>
+            Full Name :
+            <input
+              type="text"
+              name="input_name"
+              id="input_name"
+              required
+              value={formState.name}
+              onChange={(e) =>
+                dispatch({ type: "update_name", payload: e.target.value })
+              }
+            />
+          </label>
+          <label className={`${styles["full-w-label"]}`}>
+            Eamil :
+            <input
+              type="email"
+              name="input_email"
+              id="input_email"
+              required
+              value={formState.email}
+              onChange={(e) =>
+                dispatch({ type: "update_email", payload: e.target.value })
+              }
+            />
+          </label>
+          <label className={`${styles["full-w-label"]}`}>
+            Password :
+            <input
+              type="password"
+              name="input_password"
+              id="input_password"
+              required
+              value={formState.password}
+              onChange={(e) =>
+                dispatch({ type: "update_password", payload: e.target.value })
+              }
+            />
+          </label>
+          <label className={`${styles["full-w-label"]}`}>
+            Selete Account Type :
+            <select
+              value={formState.user_type}
+              onChange={(e) =>
+                dispatch({
+                  type: "update_account_type",
+                  payload: e.target.value,
+                })
+              }
+            >
+              <option value="customer">Customer</option>
+              <option value="landlord">Landlord</option>
+              <option value="agent">Agent</option>
+            </select>
+          </label>
+          <button type="submit" className={`${styles["full-w-label"]}`}>
+            Submit
+          </button>
+        </form>
+        <p className={styles["more-actions"]}>
+          Already Registiered?{" "}
+          <span onClick={() => changeFormTypeFunc("login")}>Login</span>
+        </p>
+      </div>
   );
 }
