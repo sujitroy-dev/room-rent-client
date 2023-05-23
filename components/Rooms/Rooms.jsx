@@ -8,6 +8,7 @@ import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 const settings = {
   dots: false,
   infinite: false,
+  initialSlide: 0,
   speed: 500,
   slidesToShow: 3.8,
   slidesToScroll: 1,
