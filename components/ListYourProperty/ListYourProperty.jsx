@@ -1,4 +1,4 @@
-import styles from "./ListYourProperty.module.css";
+import styles from "./ListYourProperty.module.scss";
 
 export default function ListYourProperty() {
   return (
@@ -20,7 +20,7 @@ export default function ListYourProperty() {
             type="video/mp4"
           />
         </video>
-        <div className={styles["model-image"]}></div>
+        {/* <div className={styles["model-image"]}></div> */}
         <div className={styles["step-cards-container"]}>
           <ListCard
             number={1}
