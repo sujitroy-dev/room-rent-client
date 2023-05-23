@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+"use client";
+import React, { useRef } from "react";
 import Slider from "react-slick";
 import styles from "./Rooms.module.scss";
 import RoomCard from "./RoomCard/RoomCard";
@@ -7,7 +8,7 @@ import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 
 const settings = {
   dots: false,
-  infinite: false,
+  infinite: true,
   initialSlide: 0,
   speed: 500,
   slidesToShow: 3.8,
@@ -149,7 +150,42 @@ const settings = {
     {
       breakpoint: 590,
       settings: {
+        slidesToShow: 1.6,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 570,
+      settings: {
+        slidesToShow: 1.5,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 535,
+      settings: {
         slidesToShow: 1.4,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 490,
+      settings: {
+        slidesToShow: 1.3,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 455,
+      settings: {
+        slidesToShow: 1.2,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 420,
+      settings: {
+        slidesToShow: 1,
         slidesToScroll: 1,
       },
     },
