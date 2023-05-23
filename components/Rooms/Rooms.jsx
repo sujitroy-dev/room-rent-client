@@ -9,147 +9,147 @@ const settings = {
   dots: false,
   infinite: false,
   speed: 500,
-  slidesToShow: 4,
+  slidesToShow: 3.8,
   slidesToScroll: 1,
   responsive: [
     {
       breakpoint: 1439,
       settings: {
         slidesToShow: 3.1,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 1380,
       settings: {
         slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 1332,
       settings: {
         slidesToShow: 2.9,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 1292,
       settings: {
         slidesToShow: 2.8,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 1244,
       settings: {
         slidesToShow: 2.7,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 1200,
       settings: {
         slidesToShow: 2.6,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 1156,
       settings: {
         slidesToShow: 2.5,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 1108,
       settings: {
         slidesToShow: 2.4,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 1060,
       settings: {
         slidesToShow: 2.3,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 1020,
       settings: {
         slidesToShow: 2.2,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 970,
       settings: {
         slidesToShow: 2.1,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 930,
       settings: {
         slidesToShow: 2,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 890,
       settings: {
         slidesToShow: 1.9,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 848,
       settings: {
         slidesToShow: 1.8,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 800,
       settings: {
         slidesToShow: 1.7,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 770,
       settings: {
         slidesToShow: 1.8,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 725,
       settings: {
         slidesToShow: 1.7,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 670,
       settings: {
         slidesToShow: 1.6,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 630,
       settings: {
         slidesToShow: 1.5,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
     {
       breakpoint: 590,
       settings: {
         slidesToShow: 1.4,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
       },
     },
   ],

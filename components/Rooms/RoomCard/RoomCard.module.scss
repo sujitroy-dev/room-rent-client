@@ -1,5 +1,5 @@
 .room-card{
-    width: 340px;
+    width: 300px;
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
@@ -40,7 +40,7 @@
     }
     .wishlist-btn{
         display: flex;
-        padding: 6px;
+        padding: 4px;
         border: 1.2px solid #c9c9c9;
         border-radius: 5px;
         color: red;
@@ -55,7 +55,7 @@
         // color: #fff;
         // background: var(--secondary-bg);
         font-weight: 500;
-        padding: 8px 20px;
+        padding: 4px 20px;
         border-radius: 5px;
         display: flex;
         align-items: center;
