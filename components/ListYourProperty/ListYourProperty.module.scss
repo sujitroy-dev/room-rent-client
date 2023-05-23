@@ -60,3 +60,14 @@
   line-height: 1.4rem;
   font-weight: 500;
 }
+
+
+@media screen and (max-width:768px) {
+  .wrapper{
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+  .step-card{
+    width: 100%;
+  }
+}
