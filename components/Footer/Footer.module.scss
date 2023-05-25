@@ -2,10 +2,11 @@
   background: #141414;
 }
 .footer__top{
+  max-width: var(--max-width);
+  margin: auto;
   display: grid;
   grid-template-columns: 4fr 2fr 2fr;
-  padding: 120px;
-  padding-bottom: 40px;
+  padding: 80px 40px;
   color: #fff;
   grid-column-gap: 5rem;
 }
