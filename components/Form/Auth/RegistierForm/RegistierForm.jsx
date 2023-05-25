@@ -1,6 +1,8 @@
 "use client";
 import styles from "./RegistierForm.module.scss";
 import { useReducer } from "react";
+import { toast } from 'react-toastify';
+
 const initialForm = {
   name: "",
   email: "",
@@ -17,38 +19,36 @@ const reducer = (state, action) => {
       return { ...state, password: action.payload };
     case "update_account_type":
       return { ...state, user_type: action.payload };
-    case "claer_form":
-      return {
-        name: "",
-        email: "",
-        password: "",
-        user_type: "customer",
-      };
+    case "clear_form":
+      return initialForm;
     default:
       return state;
   }
 };
-const submitForm = async (url, formData) => {
-  try {
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
 export default function RegistierForm({ changeFormTypeFunc }) {
   const [formState, dispatch] = useReducer(reducer, initialForm);
-
+  
+  const submitForm = async (url, formData) => {
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const responseData = await response.json();
+      if(responseData.success) return toast.success("Registered Successfully");
+      toast.error(responseData.message)
+      dispatch({ type: "clear_form"})
+    } catch (error) {
+      console.log(error);
+    }
+  };
   function submitRegistrationForm(event) {
     event.preventDefault();
     const url = `${process.env.API_BASE}/user/register`;
     submitForm(url, formState);
-    // dispatch({type: 'claer_form'})
   }
 
   return (
