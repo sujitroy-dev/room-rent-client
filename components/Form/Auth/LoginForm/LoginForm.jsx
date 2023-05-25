@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import styles from './LoginForm.module.scss';
+import { toast } from 'react-toastify';
+
 
 export default function LoginForm({changeFormTypeFunc}) {
   const [email, setEmail] = useState();
@@ -10,17 +12,22 @@ export default function LoginForm({changeFormTypeFunc}) {
       const response = await fetch(url, {
         method: "POST",
         headers: {"Content-Type": "application/json",},
-        body: JSON.stringify(formData)})
+        body: JSON.stringify(formData)
+      })
+      
+      const responseData = await response.json();
+      
+      if(responseData.success) return toast.success("Loged In Successfully");
+      return toast.error(responseData.message)
 
-      const data = await response.json();
-      if (data.success) changeFormTypeFunc(false);
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
   };
-
+  
   function submitLoginForm() {
     event.preventDefault();
+    console.log('post reg form func');
     const url = `${process.env.API_BASE}/user/login`;
     submitForm(url, {email, password});
   }
