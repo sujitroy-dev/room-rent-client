@@ -6,7 +6,7 @@ import HeaderWithoutSearch from "@/components/HeaderWithoutSearch/HeaderWithoutS
 import { useState } from "react";
 
 export default function WithoutSearchLayout({ children }) {
-  const [isOpen, setOpen] = useState(false);
+  // const [isOpen, setOpen] = useState(false);
   return (
     <>
       <div
@@ -16,7 +16,7 @@ export default function WithoutSearchLayout({ children }) {
         <main style={{ flex: 1 }}>{children}</main>
         <Footer />
       </div>
-      <AuthForm open={isOpen} setOpenFun={setOpen}/>
+      <AuthForm/>
     </>
   );
 }

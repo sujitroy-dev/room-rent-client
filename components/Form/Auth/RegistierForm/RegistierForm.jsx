@@ -2,6 +2,8 @@
 import styles from "./RegistierForm.module.scss";
 import { useReducer } from "react";
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux'
+import { hideAuthForm } from '@/redux/features/layout/layoutSlice.js'
 
 const initialForm = {
   name: "",
@@ -27,6 +29,8 @@ const reducer = (state, action) => {
 };
 export default function RegistierForm({ changeFormTypeFunc }) {
   const [formState, dispatch] = useReducer(reducer, initialForm);
+  const dispatchGlob = useDispatch();
+  const hideAuthFormFunc = ()=>dispatchGlob(hideAuthForm());
   
   const submitForm = async (url, formData) => {
     try {
@@ -38,7 +42,10 @@ export default function RegistierForm({ changeFormTypeFunc }) {
         body: JSON.stringify(formData),
       });
       const responseData = await response.json();
-      if(responseData.success) return toast.success("Registered Successfully");
+      if(responseData.success) {
+        hideAuthFormFunc();
+        return toast.success("Registered Successfully");
+      }
       toast.error(responseData.message)
       dispatch({ type: "clear_form"})
     } catch (error) {

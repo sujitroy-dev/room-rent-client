@@ -3,9 +3,13 @@ import Link from "next/link";
 import { GoSearch } from "react-icons/go";
 import { AiFillHeart } from "react-icons/ai";
 import { RiUser6Fill } from "react-icons/ri";
+import { useDispatch } from 'react-redux'
+import { makeAuthFormVisible } from '@/redux/features/layout/layoutSlice.js'
 
-export default function HeaderWithoutSearch({showLoginFunc}) {
+export default function HeaderWithoutSearch() {
   const isLoggedIn = false;
+  const dispatch = useDispatch()
+  const showAuthFormFunc = ()=>dispatch(makeAuthFormVisible());
 
   return (
     <div>
@@ -19,7 +23,7 @@ export default function HeaderWithoutSearch({showLoginFunc}) {
               <AiFillHeart size="25px" className={styles["wishlist-icon"]} />
             </Link>
             {!isLoggedIn ? (
-              <div className={styles["registier-login"]} onClick={showLoginFunc}>
+              <div className={styles["registier-login"]} onClick={showAuthFormFunc}>
                 Login
               </div>
             ) : (
