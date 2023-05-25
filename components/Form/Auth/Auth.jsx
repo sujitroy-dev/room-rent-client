@@ -10,7 +10,6 @@ export default function AuthForm() {
   const dispatch = useDispatch()
   const isAuthFormVisible = useSelector((state) => state.layout.authFormVisible)
   const hideAuthFormFunc = ()=>dispatch(hideAuthForm());
-  console.log({isAuthFormVisible});
   return (
     <>
       {isAuthFormVisible && (
