@@ -4,13 +4,12 @@ import Head from "next/head";
 import WithoutSearchLayout from "@/layouts/WithoutSearchLayout/WithoutSearchLayout";
 import { GoSearch } from "react-icons/go";
 import ListYourProperty from "@/components/ListYourProperty/ListYourProperty";
-import RecentRooms from "@/components/Rooms/RecentRooms/RecentRooms";
-import FullFrunishedRooms from "@/components/Rooms/FullFrunishedRooms/FullFrunishedRooms";
-import SemiFrunishedRooms from "@/components/Rooms/SemiFrunishedRooms/SemiFrunishedRooms";
-import NoneFrunishedRooms from "@/components/Rooms/NoneFrunishedRooms/NoneFrunishedRooms";
+import Rooms from "@/components/Rooms/Rooms";
 
 
-export default function Home() {
+export default function Home(props) {
+  console.log();
+
   const inputRef = useRef("");
   const [searchInput, setSearchInput] = useState("");
   function handleSearchSubmit() {
@@ -46,11 +45,11 @@ export default function Home() {
               </button>
             </from>
           </section>
-          <RecentRooms/>
+          <Rooms header="Recently Listed" rooms={props.recentRooms}/>
           <ListYourProperty/>
-          <FullFrunishedRooms/>
-          <SemiFrunishedRooms/>
-          <NoneFrunishedRooms/>
+          <Rooms header="Full Furnished Rooms" rooms={props.fullFurnishedRooms}/>
+          <Rooms header="Semi Furnished Rooms" rooms={props.semiFurnishedRooms}/>
+          <Rooms header="None Furnished Rooms" rooms={props.noneFurnishedRooms}/>
         </WithoutSearchLayout>
 
       </main>
@@ -60,3 +59,29 @@ export default function Home() {
 
 //todo: testimonials
 //todo: qna
+
+
+
+export const getServerSideProps = async ({req, res}) => {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59',
+  );
+  // fetch recent rooms
+  const recentRoomsResponse = await fetch(`${process.env.API_BASE}/room/recent`);
+  const recentRooms = await recentRoomsResponse.json();
+
+  // fetch full furnished rooms
+  const fullFurnishedRoomsResponse = await fetch(`${process.env.API_BASE}/room/full-furnished`)
+  const fullFurnishedRooms = await fullFurnishedRoomsResponse.json();
+
+  // fetch semi furnished rooms
+  const semiFurnishedRoomsResponse = await fetch(`${process.env.API_BASE}/room/semi-furnished`)
+  const semiFurnishedRooms = await semiFurnishedRoomsResponse.json();
+
+  // fetch none furnished rooms
+  const noneFurnishedRoomsResponse = await fetch(`${process.env.API_BASE}/room/none-furnished`)
+  const noneFurnishedRooms = await noneFurnishedRoomsResponse.json();
+  
+  return { props: { recentRooms, fullFurnishedRooms, semiFurnishedRooms, noneFurnishedRooms } };
+};
