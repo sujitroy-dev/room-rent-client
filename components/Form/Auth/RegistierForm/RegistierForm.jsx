@@ -32,14 +32,15 @@ export default function RegistierForm({ changeFormTypeFunc }) {
   const dispatchGlob = useDispatch();
   const hideAuthFormFunc = ()=>dispatchGlob(hideAuthForm());
   
-  const submitForm = async (url, formData) => {
+  const submitForm = async () => {
+    const url = `${process.env.API_BASE}/user/register`;
     try {
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formState),
       });
       const responseData = await response.json();
       if(responseData.success) {
@@ -53,11 +54,14 @@ export default function RegistierForm({ changeFormTypeFunc }) {
       console.log(error);
     }
   };
-  function submitRegistrationForm(event) {
-    event.preventDefault();
-    const url = `${process.env.API_BASE}/user/register`;
-    submitForm(url, formState);
-  }
+  // function submitRegistrationForm(event) {
+  //   event.preventDefault();
+  //   return debounce(submitForm, 400);
+  // }
+  const submitRegistrationForm = (e) =>{
+    e.preventDefault();
+    submitForm();
+  };
 
   return (
       <div className={styles.form__container}>

@@ -1,16 +1,20 @@
+'use client';
 import styles from "./HeaderWithoutSearch.module.scss";
 import Link from "next/link";
-import { GoSearch } from "react-icons/go";
 import { AiFillHeart } from "react-icons/ai";
 import { RiUser6Fill } from "react-icons/ri";
 import { useDispatch } from 'react-redux'
 import { makeAuthFormVisible } from '@/redux/features/layout/layoutSlice.js'
+import { useEffect, useState } from "react";
 
 export default function HeaderWithoutSearch() {
-  const isLoggedIn = false;
   const dispatch = useDispatch()
   const showAuthFormFunc = ()=>dispatch(makeAuthFormVisible());
+  let isLoggedIn = false;
 
+  if (typeof window !== "undefined") {
+    // isLoggedIn = localStorage.getItem("token");
+  }
   return (
     <div>
       <header className={styles.header}>

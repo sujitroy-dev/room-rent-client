@@ -31,12 +31,13 @@ export default function LoginForm({ changeFormTypeFunc }) {
     }
   };
 
-  function submitLoginForm() {
+  function submitLoginForm(event) {
     event.preventDefault();
-    console.log("post reg form func");
     const url = `${process.env.API_BASE}/user/login`;
-    submitForm(url, { email, password });
+
+    submitForm(url, { email, password })
   }
+
   return (
     <div className={styles.form__container}>
       <h2>Login</h2>

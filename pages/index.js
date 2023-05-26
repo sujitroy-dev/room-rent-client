@@ -8,8 +8,6 @@ import Rooms from "@/components/Rooms/Rooms";
 
 
 export default function Home(props) {
-  console.log();
-
   const inputRef = useRef("");
   const [searchInput, setSearchInput] = useState("");
   function handleSearchSubmit() {
