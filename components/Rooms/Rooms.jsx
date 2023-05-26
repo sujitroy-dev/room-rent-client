@@ -223,6 +223,7 @@ export default function Rooms({ header, rooms }) {
               postedTime={room.postedTime}
               images={room.pictures?.[0]}
               location={room.location}
+              apartment_type={room.apartment_type}
             />
           ))}
         </Slider>
