@@ -43,6 +43,7 @@ export default function RegistierForm({ changeFormTypeFunc }) {
       });
       const responseData = await response.json();
       if(responseData.success) {
+        localStorage.setItem("token", responseData.token);
         hideAuthFormFunc();
         return toast.success("Registered Successfully");
       }

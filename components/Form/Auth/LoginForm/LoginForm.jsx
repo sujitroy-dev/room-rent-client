@@ -21,6 +21,7 @@ export default function LoginForm({ changeFormTypeFunc }) {
       const responseData = await response.json();
 
       if (responseData.success) {
+        localStorage.setItem("token", responseData.token);
         hideAuthFormFunc();
         return toast.success("Loged In Successfully");
       }
