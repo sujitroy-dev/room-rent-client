@@ -11,8 +11,8 @@ import useParseJWT from "@/hooks/useParseJWT";
 export default function HeaderWithoutSearch() {
   const dispatch = useDispatch();
   const showAuthFormFunc = () => dispatch(makeAuthFormVisible());
-  const [isLoggedIn, setLoggedIn] = useState(false);
-
+  const [isLoggedIn, setLoggedIn] = useState(null);
+  
   useEffect(() => {
     let isLoggedIn = localStorage.getItem("token");
 

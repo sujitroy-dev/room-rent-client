@@ -4,7 +4,10 @@ import Head from "next/head";
 import WithoutSearchLayout from "@/layouts/WithoutSearchLayout/WithoutSearchLayout";
 import { GoSearch } from "react-icons/go";
 import ListYourProperty from "@/components/ListYourProperty/ListYourProperty";
-import Rooms from "@/components/Rooms/Rooms";
+import RecentlyListedRooms from "@/components/Rooms/RecentlyListedRooms";
+import FullFurnishedRooms from "@/components/Rooms/FullFurnishedRooms";
+import SemiFurnishedRooms from "@/components/Rooms/SemiFurnishedRooms";
+import NoneFurnishedRooms from "@/components/Rooms/NoneFurnishedRooms";
 
 
 export default function Home(props) {
@@ -43,13 +46,12 @@ export default function Home(props) {
               </button>
             </from>
           </section>
-          <Rooms header="Recently Listed" rooms={props.recentRooms}/>
+          <RecentlyListedRooms/>
           <ListYourProperty/>
-          <Rooms header="Full Furnished Rooms" rooms={props.fullFurnishedRooms}/>
-          <Rooms header="Semi Furnished Rooms" rooms={props.semiFurnishedRooms}/>
-          <Rooms header="None Furnished Rooms" rooms={props.noneFurnishedRooms}/>
+          <FullFurnishedRooms/>
+          <SemiFurnishedRooms/>
+          <NoneFurnishedRooms/>
         </WithoutSearchLayout>
-
       </main>
     </>
   );
@@ -57,29 +59,3 @@ export default function Home(props) {
 
 //todo: testimonials
 //todo: qna
-
-
-
-export const getServerSideProps = async ({req, res}) => {
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59',
-  );
-  // fetch recent rooms
-  const recentRoomsResponse = await fetch(`${process.env.API_BASE}/room/recent`);
-  const recentRooms = await recentRoomsResponse.json();
-
-  // fetch full furnished rooms
-  const fullFurnishedRoomsResponse = await fetch(`${process.env.API_BASE}/room/full-furnished`)
-  const fullFurnishedRooms = await fullFurnishedRoomsResponse.json();
-
-  // fetch semi furnished rooms
-  const semiFurnishedRoomsResponse = await fetch(`${process.env.API_BASE}/room/semi-furnished`)
-  const semiFurnishedRooms = await semiFurnishedRoomsResponse.json();
-
-  // fetch none furnished rooms
-  const noneFurnishedRoomsResponse = await fetch(`${process.env.API_BASE}/room/none-furnished`)
-  const noneFurnishedRooms = await noneFurnishedRoomsResponse.json();
-  
-  return { props: { recentRooms, fullFurnishedRooms, semiFurnishedRooms, noneFurnishedRooms } };
-};

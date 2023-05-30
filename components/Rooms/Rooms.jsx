@@ -224,6 +224,7 @@ export default function Rooms({ header, rooms }) {
               images={room.pictures?.[0]}
               location={room.location}
               apartment_type={room.apartment_type}
+              path={`/room/${room._id}`}
             />
           ))}
         </Slider>
