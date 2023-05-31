@@ -2,8 +2,9 @@
 import styles from "./RegistierForm.module.scss";
 import { useReducer } from "react";
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux'
-import { hideAuthForm } from '@/redux/features/layout/layoutSlice.js'
+import { useDispatch } from 'react-redux';
+import { hideAuthForm } from '@/redux/features/layout/layoutSlice.js';
+import { useRouter } from "next/navigation";
 
 const initialForm = {
   name: "",
@@ -28,6 +29,8 @@ const reducer = (state, action) => {
   }
 };
 export default function RegistierForm({ changeFormTypeFunc }) {
+    const router = useRouter();
+
   const [formState, dispatch] = useReducer(reducer, initialForm);
   const dispatchGlob = useDispatch();
   const hideAuthFormFunc = ()=>dispatchGlob(hideAuthForm());
@@ -46,6 +49,7 @@ export default function RegistierForm({ changeFormTypeFunc }) {
       if(responseData.success) {
         localStorage.setItem("token", responseData.token);
         hideAuthFormFunc();
+        router.refresh();
         return toast.success("Registered Successfully");
       }
       toast.error(responseData.message)
@@ -54,10 +58,6 @@ export default function RegistierForm({ changeFormTypeFunc }) {
       console.log(error);
     }
   };
-  // function submitRegistrationForm(event) {
-  //   event.preventDefault();
-  //   return debounce(submitForm, 400);
-  // }
   const submitRegistrationForm = (e) =>{
     e.preventDefault();
     submitForm();
