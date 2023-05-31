@@ -50,7 +50,6 @@ export default function RegistierForm({ changeFormTypeFunc }) {
         localStorage.setItem("token", responseData.token);
         hideAuthFormFunc();
         router.refresh();
-        return toast.success("Registered Successfully");
       }
       toast.error(responseData.message)
       dispatch({ type: "clear_form"})

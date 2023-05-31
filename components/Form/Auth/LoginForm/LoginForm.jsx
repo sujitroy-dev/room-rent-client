@@ -28,7 +28,6 @@ export default function LoginForm({ changeFormTypeFunc }) {
         localStorage.setItem("token", responseData.token);
         router.refresh();
         hideAuthFormFunc();
-        return toast.success("Loged In Successfully");
       }
       return toast.error(responseData.message);
     } catch (error) {
