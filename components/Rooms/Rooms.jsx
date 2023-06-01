@@ -192,7 +192,7 @@ const settings = {
   ],
 };
 
-export default function Rooms({ header, rooms }) {
+export default function Rooms({ header, rooms = [] }) {
   const CarouselRef = useRef(null);
 
   return (
@@ -212,7 +212,7 @@ export default function Rooms({ header, rooms }) {
           <GrLinkPrevious />
         </div>
         <Slider {...settings} ref={CarouselRef}>
-          {rooms?.map((room) => (
+          {rooms.map((room) => (
             <RoomCard
               key={room._id}
               title={room.title}
