@@ -8,6 +8,7 @@ import RecentlyListedRooms from "@/components/Rooms/RecentlyListedRooms";
 import FullFurnishedRooms from "@/components/Rooms/FullFurnishedRooms";
 import SemiFurnishedRooms from "@/components/Rooms/SemiFurnishedRooms";
 import NoneFurnishedRooms from "@/components/Rooms/NoneFurnishedRooms";
+import Testimonials from "@/components/Testimonials/Testimonials";
 
 
 export default function Home(props) {
@@ -51,11 +52,10 @@ export default function Home(props) {
           <FullFurnishedRooms/>
           <SemiFurnishedRooms/>
           <NoneFurnishedRooms/>
+          <Testimonials/>
         </WithoutSearchLayout>
       </main>
     </>
   );
 }
-
-//todo: testimonials
 //todo: qna

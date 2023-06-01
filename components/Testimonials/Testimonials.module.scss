@@ -1,0 +1,36 @@
+.testimonials {
+  padding: 40px 0;
+}
+.testimonials__title {
+  max-width: var(--max-width);
+  margin: auto;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 2.2rem;
+}
+.testimonials__container {
+  max-width: var(--max-width);
+  position: relative;
+  margin: auto;
+}
+
+.prev-slide-btn,
+.next-slide-btn {
+  width: 55px;
+  border: 1px solid black;
+  border-radius: 50%;
+  position: absolute;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  top: 104px;
+  cursor: pointer;
+}
+.prev-slide-btn {
+  left: -55px;
+}
+.next-slide-btn {
+  right: -55px;
+}
