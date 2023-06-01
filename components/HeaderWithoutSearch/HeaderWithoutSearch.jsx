@@ -6,7 +6,6 @@ import { RiUser6Fill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { makeAuthFormVisible } from "@/redux/features/layout/layoutSlice.js";
 import { useEffect, useState } from "react";
-import useParseJWT from "@/hooks/useParseJWT";
 
 export default function HeaderWithoutSearch() {
   const dispatch = useDispatch();
@@ -17,9 +16,7 @@ export default function HeaderWithoutSearch() {
     let isLoggedIn = localStorage.getItem("token");
 
     if (isLoggedIn) {
-      const data = useParseJWT(isLoggedIn);
-      if (data.email) return setLoggedIn(true);
-      return setLoggedIn(false)
+      return setLoggedIn(true)
     }else{
       return setLoggedIn(false);
     }

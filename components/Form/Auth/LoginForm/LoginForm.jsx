@@ -3,8 +3,12 @@ import styles from "./LoginForm.module.scss";
 import { toast } from "react-toastify";
 import { useDispatch } from 'react-redux'
 import { hideAuthForm } from '@/redux/features/layout/layoutSlice.js'
+import { useRouter } from "next/navigation";
+
 
 export default function LoginForm({ changeFormTypeFunc }) {
+  const router = useRouter();
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const dispatchGlob = useDispatch();
@@ -22,8 +26,8 @@ export default function LoginForm({ changeFormTypeFunc }) {
 
       if (responseData.success) {
         localStorage.setItem("token", responseData.token);
+        router.refresh();
         hideAuthFormFunc();
-        return toast.success("Loged In Successfully");
       }
       return toast.error(responseData.message);
     } catch (error) {
