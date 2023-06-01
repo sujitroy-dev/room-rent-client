@@ -82,6 +82,7 @@ export default function Testimonials() {
           {testimonials.map((user) => {
             return (
               <TestimonialCard
+                key={user.message}
                 name={user.name}
                 designation={user.designation}
                 image={user.user_pic}
