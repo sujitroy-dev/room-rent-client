@@ -1,88 +1,62 @@
-import { useState, useEffect, useRef } from "react";
+"use client";
 import styles from "./Header.module.scss";
 import Link from "next/link";
-import { GoSearch } from "react-icons/go";
 import { AiFillHeart } from "react-icons/ai";
-import { RiUser6Fill } from 'react-icons/ri';
+import { RiUser6Fill } from "react-icons/ri";
+import { useDispatch } from "react-redux";
+import { makeAuthFormVisible } from "@/redux/features/layout/layoutSlice.js";
+import { useEffect, useState } from "react";
+import { GoSearch } from "react-icons/go";
 
-export default function Header({search}) {
-  const [searchValue, setSearchValue] = useState("");
-  const isLoggedIn = false;
-  const inputRef = useRef(null);
+export default function HeaderWithoutSearch() {
+  const dispatch = useDispatch();
+  const showAuthFormFunc = () => dispatch(makeAuthFormVisible());
+  const [isLoggedIn, setLoggedIn] = useState(null);
 
-  const handleSearchChange = (event) => {
-    setSearchValue(event.target.value);
-  };
-  const handleSlashKeyPress = (event) => {
-    if (event.key === "/") {
-      event.preventDefault();
-      inputRef.current.focus();
-    }
-  };
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    console.log(inputRef.current.value);
-  };
   useEffect(() => {
-    document.addEventListener("keydown", handleSlashKeyPress);
-    return () => {
-      document.removeEventListener("keydown", handleSlashKeyPress);
-    };
+    let isLoggedIn = localStorage.getItem("token");
+
+    if (isLoggedIn) {
+      return setLoggedIn(true);
+    } else {
+      return setLoggedIn(false);
+    }
   }, []);
 
+  function handleSearchSubmit() {
+    e.preventDefault();
+  }
+
   return (
-    <header className={styles.header}>
-      <div className={styles.header__wrapper}>
-        <Link href="/" className={styles.header__logo}>
-          Room Rent
-        </Link>
-        <form
-          className={`${styles.header__search} ${styles["header__search--desktop"]}`}
-          onSubmit={handleSearchSubmit}
-        >
-          <input
-            type="text"
-            ref={inputRef}
-            placeholder="search area name..."
-            onChange={handleSearchChange}
-          />
-          <GoSearch
-            size="25px"
-            className={styles["search-icon"]}
-            onClick={handleSearchSubmit}
-          />
-        </form>
-        <div className={styles["cta-container"]}>
-         {!isLoggedIn?<div className={styles["registier-login"]}>
-            <Link href="/">Registier</Link>
-            <span> / </span>
-            <Link href="/">Login</Link>
-          </div>:<RiUser6Fill size="41px" className={styles['user-icon']}/>}
-          <Link href="/">
-            <AiFillHeart size="25px" className={styles["wishlist-icon"]} />
+    <div>
+      <header className={styles.header}>
+        <div className={styles.header__wrapper}>
+          <Link href="/" className={styles.header__logo}>
+            Room Rent
           </Link>
+          <form className={styles.header__search} onSubmit={handleSearchSubmit}>
+            <input type="text" placeholder="Search..." />
+            <button>
+              <GoSearch size="25px" className={styles["search-icon"]} />
+            </button>
+          </form>
+          <div className={styles["cta-container"]}>
+            <Link href="/">
+              <AiFillHeart size="25px" className={styles["wishlist-icon"]} />
+            </Link>
+            {!isLoggedIn ? (
+              <div
+                className={styles["registier-login"]}
+                onClick={showAuthFormFunc}
+              >
+                Login
+              </div>
+            ) : (
+              <RiUser6Fill size="41px" className={styles["user-icon"]} />
+            )}
+          </div>
         </div>
-      </div>
-      <div className={styles["header__search-wrapper"]}>
-        <form
-          className={`${styles.header__search} ${styles["header__search--tablet"]}`}
-          onSubmit={handleSearchSubmit}
-        >
-          <input
-            type="text"
-            placeholder="search area name..."
-            onChange={handleSearchChange}
-          />
-          <GoSearch
-            size="25px"
-            className={styles["search-icon"]}
-            onClick={handleSearchSubmit}
-          />
-        </form>
-        <Link href="/">
-          <AiFillHeart size="25px" className={styles["wishlist-icon"]} />
-        </Link>
-      </div>
-    </header>
+      </header>
+    </div>
   );
 }
