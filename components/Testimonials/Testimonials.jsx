@@ -16,15 +16,13 @@ const settings = {
 
 export default function Testimonials() {
   const CarouselRef = useRef(null);
-
+  
   async function fetchRooms() {
     const response = await fetch(`${process.env.API_BASE}/testimonial`);
     return (await response).json();
   }
-
-  const { data: testimonials } = useQuery("testimonial", fetchRooms, {
-    data: [],
-  });
+  
+  const { data: testimonials } = useQuery("testimonial", fetchRooms);
 
   return (
     <div className={styles.testimonials}>
@@ -42,20 +40,39 @@ export default function Testimonials() {
         >
           <GrLinkPrevious />
         </div>
-        <Slider {...settings} ref={CarouselRef}>
-          {testimonials?.data.map((user) => {
-            return (
-              <TestimonialCard
-                key={user.message}
-                name={user.name}
-                designation={user.designation}
-                image={user.user_pic}
-                message={user.message}
-              />
-            );
-          })}
-        </Slider>
+        {testimonials !== undefined ? (
+          <Slider {...settings} ref={CarouselRef}>
+            {testimonials?.data.map((user) => {
+              return (
+                <TestimonialCard
+                  key={user.message}
+                  name={user.name}
+                  designation={user.designation}
+                  image={user.user_pic}
+                  message={user.message}
+                />
+              );
+            })}
+          </Slider>
+        ) :<Slider {...settings} ref={CarouselRef}>
+            <TestimonialShimmerCard />
+            <TestimonialShimmerCard />
+            <TestimonialShimmerCard />
+          </Slider>}
       </div>
     </div>
+  );
+}
+
+function TestimonialShimmerCard() {
+  return (
+    <>
+      <div className={styles["testimonials-shimmer"]}>
+        <div className={`${styles.image} animate`} />
+        <div className={`${styles.name} animate`} />
+        <div className={`${styles.message} animate`} />
+        <div className={`${styles.designation} animate`} />
+      </div>
+    </>
   );
 }
