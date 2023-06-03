@@ -197,48 +197,51 @@ export default function Rooms({ header, rooms = [] }) {
   return (
     <div className={styles.rooms}>
       <h2 className={styles.title}>{header}</h2>
-      {rooms.length !== 0 ? (
-        <div className={styles.rooms__container}>
-          <div
-            className={styles["next-slide-btn"]}
-            onClick={() => CarouselRef?.current?.slickNext()}
-          >
-            <GrLinkNext />
-          </div>
-          <div
-            className={styles["prev-slide-btn"]}
-            onClick={() => CarouselRef?.current?.slickPrev()}
-          >
-            <GrLinkPrevious />
-          </div>
-          <Slider {...settings} ref={CarouselRef}>
-            {rooms.map((room) => (
-              <RoomCard
-                key={room._id}
-                title={room.title}
-                rent={room.rent_amount}
-                currency={room.currency}
-                deposit={room.deposit}
-                security={room.security_amount}
-                postedTime={room.postedTime}
-                images={room.pictures?.[0]}
-                location={room.location}
-                apartment_type={room.apartment_type}
-                path={`/room/${room._id}`}
-              />
-            ))}
-          </Slider>
+      {/* {rooms.length === 0 ? ( */}
+      <div className={styles.rooms__container}>
+        <div
+          className={styles["next-slide-btn"]}
+          onClick={() => CarouselRef?.current?.slickNext()}
+        >
+          <GrLinkNext />
         </div>
-      ) : (
-        <ShimmerEffect />
-      )}
+        <div
+          className={styles["prev-slide-btn"]}
+          onClick={() => CarouselRef?.current?.slickPrev()}
+        >
+          <GrLinkPrevious />
+        </div>
+        {(rooms.length !==0)?<Slider {...settings} ref={CarouselRef}>
+              {rooms.map((room) => (
+                <RoomCard
+                  key={room._id}
+                  title={room.title}
+                  rent={room.rent_amount}
+                  currency={room.currency}
+                  deposit={room.deposit}
+                  security={room.security_amount}
+                  postedTime={room.postedTime}
+                  images={room.pictures?.[0]}
+                  location={room.location}
+                  apartment_type={room.apartment_type}
+                  path={`/room/${room._id}`}
+                />
+              ))}
+        </Slider>:
+        <Slider {...settings} ref={CarouselRef}>
+            <ShimmerRoomCard />
+            <ShimmerRoomCard />
+            <ShimmerRoomCard />
+            <ShimmerRoomCard />
+        </Slider>}
+      </div>
     </div>
   );
 }
 
 function ShimmerEffect() {
   return (
-    <div className={styles['shimmer-effect']}>
+    <div className={styles["shimmer-effect"]}>
       <ShimmerRoomCard />
       <ShimmerRoomCard />
       <ShimmerRoomCard />
@@ -249,18 +252,18 @@ function ShimmerEffect() {
 
 function ShimmerRoomCard() {
   return (
-    <div className={`${styles["shimmer-room-card"]} card wrapper`}>
+    <div className={`${styles["shimmer-room-card"]}`}>
       <div className={`${styles.banner} animate br`} />
-      <div className={`${styles.title} animate br`}/>
+      <div className={`${styles.title} animate br`} />
       <div className={styles.details}>
-        <div className={`${styles.item} animate br`}/>
-        <div className={`${styles.item} animate br`}/>
-        <div className={`${styles.item} animate br`}/>
-        <div className={`${styles.item} animate br`}/>
+        <div className={`${styles.item} animate br`} />
+        <div className={`${styles.item} animate br`} />
+        <div className={`${styles.item} animate br`} />
+        <div className={`${styles.item} animate br`} />
       </div>
       <div className={styles.actions}>
-        <div className={`${styles.btn} animate br`}/>
-        <div className={`${styles.btn} animate br`}/>
+        <div className={`${styles.btn} animate br`} />
+        <div className={`${styles.btn} animate br`} />
       </div>
     </div>
   );
