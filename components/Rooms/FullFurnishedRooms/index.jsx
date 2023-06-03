@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Rooms from "../Rooms";
+import { useQuery } from "react-query";
 
 export default function FullFurnishedRooms() {
-  const [rooms, setRooms] = useState([]);
   async function fetchRooms() {
-    const recentRoomsResponse = await fetch(
-      `${process.env.API_BASE}/room/full-furnished`
-    );
-    const recentRooms = await recentRoomsResponse.json();
-    setRooms(recentRooms);
+    const response = await fetch(`${process.env.API_BASE}/room/full-furnished`);
+    return response.json();
   }
-  useEffect(() => {
-    fetchRooms();
-  }, []);
 
+  const { data: rooms } = useQuery("full-furnished-rooms", fetchRooms);
   return (
     <Rooms header="Full Furnished Rooms" rooms={rooms} />
   );

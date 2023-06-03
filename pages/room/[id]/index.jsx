@@ -1,25 +1,19 @@
 import { useEffect, useState } from "react";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
+import { useQuery } from "react-query";
 
 export default function RoomPage({id}) {
-  const [room , setRoom] = useState()
-
-  async function fetchRooms() {
-    const recentRoomsResponse = await fetch(
-      `${process.env.API_BASE}/room/single/${id}`
-    );
-    const recentRooms = await recentRoomsResponse.json();
-    setRoom(recentRooms.data);
+  async function fetchRoom() {
+    const response = fetch(`${process.env.API_BASE}/room/single/${id}`)
+    return (await response).json()
   }
-  useEffect(() => {
-    fetchRooms();
-  }, [id])
+  const { data: room } = useQuery(`room-${id}`, fetchRoom)
   
 
   return (
     <MainLayout>
-      <h1 style={{textAlign: "center", margin: "20px auto"}}>{room?.title}</h1>
-      <p style={{textAlign: "center"}}>{room?.description}</p>
+      <h1 style={{textAlign: "center", margin: "20px auto"}}>{room?.data?.title}</h1>
+      <p style={{textAlign: "center"}}>{room?.data?.description}</p>
     </MainLayout>
   );
 }
