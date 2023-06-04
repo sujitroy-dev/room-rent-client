@@ -30,7 +30,7 @@ export default function LoginForm({ changeFormTypeFunc }) {
         localStorage.setItem("token", responseData.token);
         Cookies.set("token", responseData.token);
         router.refresh();
-        hideAuthFormFunc();
+        return hideAuthFormFunc();
       }
       return toast.error(responseData.message);
     } catch (error) {
