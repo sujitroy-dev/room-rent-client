@@ -214,6 +214,7 @@ export default function Rooms({ header, rooms = [] }) {
               {rooms.map((room) => (
                 <RoomCard
                   key={room._id}
+                  id={room._id}
                   title={room.title}
                   rent={room.rent_amount}
                   currency={room.currency}

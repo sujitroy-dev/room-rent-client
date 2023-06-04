@@ -1,15 +1,19 @@
 import Image from "next/image";
 import styles from "./RoomCard.module.scss";
 import Link from "next/link";
+import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux'
+import { makeAuthFormVisible } from '@/redux/features/layout/layoutSlice.js'
 import {
   AiFillHeart,
   AiFillStar,
   AiOutlineHeart,
-  AiOutlineStar,
 } from "react-icons/ai";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function RoomCard({
+  id,
   title,
   rent,
   apartment_type,
@@ -46,7 +50,7 @@ export default function RoomCard({
       </div>
       <div className={styles.location}>{location}</div>
       <div className={styles.action_buttons}>
-        <WishListButton liked={true} />
+        <WishListButton liked={false} id={id}/>
         <Link href={path} className={styles["view-btn"]}>
           View Details
         </Link>
@@ -55,12 +59,54 @@ export default function RoomCard({
   );
 }
 
-function WishListButton({ liked = false }) {
+function WishListButton({ liked = false, id }) {
   const [isLiked, setLiked] = useState(liked);
+  const dispatchGlob = useDispatch();
+  const showAuthFormFunc = () => dispatchGlob(makeAuthFormVisible());
+
+
+  async function likeFunction() {
+    const response = await fetch(`${process.env.API_BASE}/wishlist/add/${id}`, {
+      method: "POST",
+      headers: {
+        credentials: 'include',
+        Authorization: Cookies.get("token")
+      },
+    })
+    const data = await response.json();
+    if (data.success) {
+      setLiked(true);
+      toast.success(data.message);
+    }
+    return data;
+  }
+  async function dislikeFunction() {
+    const response = await fetch(`${process.env.API_BASE}/wishlist/remove/${id}`, {
+      method: "DELETE",
+      headers: {
+        credentials: 'include',
+        Authorization: Cookies.get("token")
+      },
+    })
+    const data = await response.json();
+    if (data.success) {
+      setLiked(false);
+      toast.success(data.message)
+    }
+    return data;
+  }
+  
+  function handleLikeDislike() {
+    const token = Cookies.get("token");
+    if(!token) return showAuthFormFunc();
+    if(isLiked) return dislikeFunction();
+    return likeFunction();
+  }
+  
   return (
     <div
       className={styles["wishlist-btn"]}
-      onClick={() => setLiked((prev) => !prev)}
+      onClick={handleLikeDislike}
     >
       {isLiked ? (
         <AiFillHeart size="25px" className={styles["wishlist-icon"]} />
