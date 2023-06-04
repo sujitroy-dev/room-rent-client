@@ -30,7 +30,7 @@ export default function HeaderWithoutSearch() {
             Room Rent
           </Link>
           <div className={styles["cta-container"]}>
-            <Link href="/">
+            <Link href="/wishlist">
               <AiFillHeart size="25px" className={styles["wishlist-icon"]} />
             </Link>
             {!isLoggedIn ? (
