@@ -22,7 +22,8 @@ export default function RoomCard({
   postedTime,
   images,
   location,
-  path='/'
+  path='/',
+  liked=false
 }) {
   return (
     <div className={styles["room-card"]}>
@@ -50,7 +51,7 @@ export default function RoomCard({
       </div>
       <div className={styles.location}>{location}</div>
       <div className={styles.action_buttons}>
-        <WishListButton liked={false} id={id}/>
+        <WishListButton liked={liked} id={id}/>
         <Link href={path} className={styles["view-btn"]}>
           View Details
         </Link>
@@ -59,7 +60,7 @@ export default function RoomCard({
   );
 }
 
-function WishListButton({ liked = false, id }) {
+function WishListButton({ liked, id }) {
   const [isLiked, setLiked] = useState(liked);
   const dispatchGlob = useDispatch();
   const showAuthFormFunc = () => dispatchGlob(makeAuthFormVisible());
