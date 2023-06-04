@@ -1,0 +1,9 @@
+.wishlist{
+    max-width: var(--max-width);
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    grid-column-gap: 40px;
+    grid-row-gap: 35px;
+    justify-content: center;
+}
