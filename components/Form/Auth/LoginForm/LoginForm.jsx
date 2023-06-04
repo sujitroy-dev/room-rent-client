@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { useDispatch } from 'react-redux'
 import { hideAuthForm } from '@/redux/features/layout/layoutSlice.js'
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+
 
 
 export default function LoginForm({ changeFormTypeFunc }) {
@@ -26,6 +28,7 @@ export default function LoginForm({ changeFormTypeFunc }) {
 
       if (responseData.success) {
         localStorage.setItem("token", responseData.token);
+        Cookies.set("token", responseData.token);
         router.refresh();
         hideAuthFormFunc();
       }
