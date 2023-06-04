@@ -197,7 +197,6 @@ export default function Rooms({ header, rooms = [] }) {
   return (
     <div className={styles.rooms}>
       <h2 className={styles.title}>{header}</h2>
-      {/* {rooms.length === 0 ? ( */}
       <div className={styles.rooms__container}>
         <div
           className={styles["next-slide-btn"]}
