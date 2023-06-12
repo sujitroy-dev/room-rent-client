@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Rooms from "../Rooms";
 import { useQuery } from "react-query";
+import Cookies from "js-cookie";
 
 export default function SemiFurnishedRooms() {
   async function fetchRooms() {
