@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Rooms from "../Rooms";
 import { useQuery } from "react-query";
+import Cookies from "js-cookie";
+
 
 export default function FullFurnishedRooms() {
   async function fetchRooms() {
-    const response = await fetch(`${process.env.API_BASE}/room/full-furnished`);
+    const response = await fetch(`${process.env.API_BASE}/room/full-furnished`, {
+      headers: {
+        credentials: 'include',
+        Authorization: Cookies.get("token")
+      },
+    });
     return response.json();
   }
 
-  const { data: rooms } = useQuery("full-furnished-rooms", fetchRooms);
-  return (
-    <Rooms header="Full Furnished Rooms" rooms={rooms} />
-  );
+  const { data: rooms, isError } = useQuery("full-furnished-rooms", fetchRooms);
+
+  if(isError) return <h1>Error Occured</h1>
+
+  return <Rooms header="Full Furnished Rooms" rooms={rooms} />
 }

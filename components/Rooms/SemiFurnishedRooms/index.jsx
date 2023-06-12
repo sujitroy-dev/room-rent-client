@@ -4,7 +4,12 @@ import { useQuery } from "react-query";
 
 export default function SemiFurnishedRooms() {
   async function fetchRooms() {
-    const response = await fetch(`${process.env.API_BASE}/room/semi-furnished`);
+    const response = await fetch(`${process.env.API_BASE}/room/semi-furnished`, {
+      headers: {
+        credentials: 'include',
+        Authorization: Cookies.get("token")
+      },
+    });
     return response.json();
   }
 
