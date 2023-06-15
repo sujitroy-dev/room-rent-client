@@ -1,7 +1,6 @@
 import Image from "next/image";
 import styles from "./RoomCard.module.scss";
 import Link from "next/link";
-import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux'
 import { makeAuthFormVisible } from '@/redux/features/layout/layoutSlice.js'
 import {
@@ -11,6 +10,7 @@ import {
 } from "react-icons/ai";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import token from "@/data/token";
 
 export default function RoomCard({
   id,
@@ -71,7 +71,7 @@ function WishListButton({ liked, id }) {
       method: "POST",
       headers: {
         credentials: 'include',
-        Authorization: "Bearer " + Cookies.get("token")
+        Authorization: token
       },
     })
     const data = await response.json();
@@ -86,7 +86,7 @@ function WishListButton({ liked, id }) {
       method: "DELETE",
       headers: {
         credentials: 'include',
-        Authorization: "Bearer " + Cookies.get("token")
+        Authorization: token
       },
     })
     const data = await response.json();
@@ -98,7 +98,7 @@ function WishListButton({ liked, id }) {
   }
   
   function handleLikeDislike() {
-    Authorization: "Bearer " + Cookies.get("token")
+    Authorization: token
     if(!token) return showAuthFormFunc();
     if(isLiked) return dislikeFunction();
     return likeFunction();

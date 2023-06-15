@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Rooms from "../Rooms";
 import { useQuery } from "react-query";
-import Cookies from "js-cookie";
+import token from "@/data/token";
 
 export default function RecentlyListedRooms() {
   async function fetchRooms() {
     const response = await fetch(`${process.env.API_BASE}/room/recent`, {
       headers: {
         credentials: 'include',
-        Authorization: "Bearer " + Cookies.get("token")
+        Authorization: token
       },
     });
     return response.json();

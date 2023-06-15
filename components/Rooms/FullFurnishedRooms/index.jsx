@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Rooms from "../Rooms";
 import { useQuery } from "react-query";
-import Cookies from "js-cookie";
-
+import token from '@/data/token';
 
 export default function FullFurnishedRooms() {
+  console.log({token});
   async function fetchRooms() {
     const response = await fetch(`${process.env.API_BASE}/room/full-furnished`, {
       headers: {
         credentials: 'include',
-        Authorization: "Bearer " + Cookies.get("token")
+        Authorization: token
       },
     });
     return response.json();

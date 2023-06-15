@@ -2,7 +2,7 @@ import RoomCard from "@/components/Rooms/RoomCard/RoomCard";
 import styles from "./index.module.scss";
 import WithoutSearchLayout from "@/layouts/WithoutSearchLayout/WithoutSearchLayout";
 import { useQuery } from "react-query";
-import Cookies from "js-cookie";
+import token from "@/data/token";
 
 export default function Wishlist() {
   async function fetchRooms() {
@@ -10,7 +10,7 @@ export default function Wishlist() {
       method: "POST",
       headers: {
         credentials: 'include',
-        Authorization: "Bearer " + Cookies.get("token")
+        Authorization: token
       },
     });
     return await response.json();
