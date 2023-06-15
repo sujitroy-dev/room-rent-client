@@ -10,7 +10,7 @@ export default function Wishlist() {
       method: "POST",
       headers: {
         credentials: 'include',
-        Authorization: Cookies.get("token")
+        Authorization: "Bearer " + Cookies.get("token")
       },
     });
     return await response.json();

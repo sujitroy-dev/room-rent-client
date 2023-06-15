@@ -8,7 +8,7 @@ export default function SemiFurnishedRooms() {
     const response = await fetch(`${process.env.API_BASE}/room/semi-furnished`, {
       headers: {
         credentials: 'include',
-        Authorization: Cookies.get("token")
+        Authorization: "Bearer " + Cookies.get("token")
       },
     });
     return response.json();

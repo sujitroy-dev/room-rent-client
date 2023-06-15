@@ -71,7 +71,7 @@ function WishListButton({ liked, id }) {
       method: "POST",
       headers: {
         credentials: 'include',
-        Authorization: Cookies.get("token")
+        Authorization: "Bearer " + Cookies.get("token")
       },
     })
     const data = await response.json();
@@ -86,7 +86,7 @@ function WishListButton({ liked, id }) {
       method: "DELETE",
       headers: {
         credentials: 'include',
-        Authorization: Cookies.get("token")
+        Authorization: "Bearer " + Cookies.get("token")
       },
     })
     const data = await response.json();
@@ -98,7 +98,7 @@ function WishListButton({ liked, id }) {
   }
   
   function handleLikeDislike() {
-    const token = Cookies.get("token");
+    Authorization: "Bearer " + Cookies.get("token")
     if(!token) return showAuthFormFunc();
     if(isLiked) return dislikeFunction();
     return likeFunction();

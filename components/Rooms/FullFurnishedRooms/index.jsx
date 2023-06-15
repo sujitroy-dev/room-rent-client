@@ -9,7 +9,7 @@ export default function FullFurnishedRooms() {
     const response = await fetch(`${process.env.API_BASE}/room/full-furnished`, {
       headers: {
         credentials: 'include',
-        Authorization: Cookies.get("token")
+        Authorization: "Bearer " + Cookies.get("token")
       },
     });
     return response.json();
