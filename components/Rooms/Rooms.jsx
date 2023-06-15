@@ -225,7 +225,7 @@ export default function Rooms({ header, rooms = [] }) {
                   location={room.location}
                   apartment_type={room.apartment_type}
                   path={`/room/${room._id}`}
-                  liked={room.liked}
+                  liked={room.like}
                 />
               ))}
         </Slider>:
