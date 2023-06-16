@@ -11,6 +11,6 @@ export default function NoneFurnishedRooms() {
   const { data: rooms } = useQuery("none-furnished-rooms", fetchRooms);
 
   return (
-    <Rooms header="None Furnished Rooms" rooms={rooms} />
+    <Rooms header="None Furnished Rooms" rooms={rooms?.data} />
   );
 }

@@ -17,6 +17,6 @@ export default function SemiFurnishedRooms() {
   const { data: rooms } = useQuery("semi-furnished-rooms", fetchRooms);
 
   return (
-    <Rooms header="Semi Furnished Rooms" rooms={rooms} />
+    <Rooms header="Semi Furnished Rooms" rooms={rooms?.data} />
   );
 }

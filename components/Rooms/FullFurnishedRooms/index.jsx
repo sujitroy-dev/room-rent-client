@@ -19,5 +19,5 @@ export default function FullFurnishedRooms() {
 
   if(isError) return <h1>Error Occured</h1>
 
-  return <Rooms header="Full Furnished Rooms" rooms={rooms} />
+  return <Rooms header="Full Furnished Rooms" rooms={rooms?.data} />
 }
