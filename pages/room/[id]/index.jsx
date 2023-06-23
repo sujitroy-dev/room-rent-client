@@ -1,3 +1,4 @@
+import styles from './index.module.css';
 import { useQuery } from "react-query";
 import WithoutSearchLayout from "@/layouts/WithoutSearchLayout/WithoutSearchLayout";
 
@@ -7,7 +8,6 @@ export default function RoomPage({id}) {
     return (await response).json()
   }
   const { data: room } = useQuery(`room-${id}`, fetchRoom)
-  
 
   return (
     <WithoutSearchLayout>

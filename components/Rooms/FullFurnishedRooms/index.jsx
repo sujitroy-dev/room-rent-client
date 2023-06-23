@@ -4,7 +4,6 @@ import { useQuery } from "react-query";
 import token from '@/data/token';
 
 export default function FullFurnishedRooms() {
-  console.log({token});
   async function fetchRooms() {
     const response = await fetch(`${process.env.API_BASE}/room/full-furnished`, {
       headers: {
