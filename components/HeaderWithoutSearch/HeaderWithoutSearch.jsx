@@ -6,6 +6,7 @@ import { RiUser6Fill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { makeAuthFormVisible } from "@/redux/features/layout/layoutSlice.js";
 import { useEffect, useState } from "react";
+import token from "@/services/auth";
 
 export default function HeaderWithoutSearch() {
   const dispatch = useDispatch();
@@ -13,14 +14,12 @@ export default function HeaderWithoutSearch() {
   const [isLoggedIn, setLoggedIn] = useState(null);
   
   useEffect(() => {
-    let isLoggedIn = localStorage.getItem("token");
-
-    if (isLoggedIn) {
+    if (token) {
       return setLoggedIn(true)
     }else{
       return setLoggedIn(false);
     }
-  }, []);
+  }, [token]);
 
   return (
     <div>

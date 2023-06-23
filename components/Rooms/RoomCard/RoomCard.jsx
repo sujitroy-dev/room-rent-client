@@ -10,7 +10,9 @@ import {
 } from "react-icons/ai";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import token from "@/data/token";
+import token from "@/services/auth";
+import { dislikeRoom, likeRoom } from "@/services/apiClients/rooms";
+
 
 export default function RoomCard({
   id,
@@ -67,14 +69,8 @@ function WishListButton({ liked, id }) {
 
 
   async function likeFunction() {
-    const response = await fetch(`${process.env.API_BASE}/wishlist/add/${id}`, {
-      method: "POST",
-      headers: {
-        credentials: 'include',
-        Authorization: token
-      },
-    })
-    const data = await response.json();
+    const data = await likeRoom(id);
+    
     if (data.success) {
       setLiked(true);
       toast.success(data.message);
@@ -82,14 +78,8 @@ function WishListButton({ liked, id }) {
     return data;
   }
   async function dislikeFunction() {
-    const response = await fetch(`${process.env.API_BASE}/wishlist/remove/${id}`, {
-      method: "DELETE",
-      headers: {
-        credentials: 'include',
-        Authorization: token
-      },
-    })
-    const data = await response.json();
+    const data = await dislikeRoom(id);
+
     if (data.success) {
       setLiked(false);
       toast.success(data.message)
@@ -98,7 +88,6 @@ function WishListButton({ liked, id }) {
   }
   
   function handleLikeDislike() {
-    Authorization: token
     if(!token) return showAuthFormFunc();
     if(isLiked) return dislikeFunction();
     return likeFunction();
