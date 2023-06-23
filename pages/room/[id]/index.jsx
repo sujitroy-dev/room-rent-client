@@ -1,13 +1,10 @@
 import styles from './index.module.css';
 import { useQuery } from "react-query";
 import WithoutSearchLayout from "@/layouts/WithoutSearchLayout/WithoutSearchLayout";
+import { getSingleRoom } from '@/services/apiClients/rooms';
 
 export default function RoomPage({id}) {
-  async function fetchRoom() {
-    const response = fetch(`${process.env.API_BASE}/room/single/${id}`)
-    return (await response).json()
-  }
-  const { data: room } = useQuery(`room-${id}`, fetchRoom)
+  const { data: room } = useQuery(`room-${id}`, ()=>getSingleRoom(id));
 
   return (
     <WithoutSearchLayout>

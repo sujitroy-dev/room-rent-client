@@ -3,6 +3,15 @@ import { authConfig } from "@/services/auth"
 const BASE_URL = process.env.API_BASE;
 
 
+export const getSingleRoom = async (id) =>{
+    try {
+        const response = await axios.get(`${BASE_URL}/room/single/${id}`, authConfig)
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const getRecentRooms = async () => {
     try {
         const response = await axios.get(`${BASE_URL}/room/recent`, authConfig);
