@@ -1,20 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Rooms from "../Rooms";
 import { useQuery } from "react-query";
-import token from '@/services/auth';
+import { getFullFurnishedRooms } from '@/services/apiClients/rooms';
 
 export default function FullFurnishedRooms() {
-  async function fetchRooms() {
-    const response = await fetch(`${process.env.API_BASE}/room/full-furnished`, {
-      headers: {
-        credentials: 'include',
-        Authorization: token
-      },
-    });
-    return response.json();
-  }
-
-  const { data: rooms, isError } = useQuery("full-furnished-rooms", fetchRooms);
+  const { data: rooms, isError } = useQuery("full-furnished-rooms", getFullFurnishedRooms);
 
   if(isError) return <h1>Error Occured</h1>
 

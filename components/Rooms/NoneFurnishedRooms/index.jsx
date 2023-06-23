@@ -1,20 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Rooms from "../Rooms";
 import { useQuery } from "react-query";
-import token from "@/services/auth";
+import { getNoneFurnishedRooms } from "@/services/apiClients/rooms";
 
 export default function NoneFurnishedRooms() {
-  async function fetchRooms() {
-    const response = await fetch(`${process.env.API_BASE}/room/none-furnished`,{
-      headers: {
-        credentials: 'include',
-        Authorization: token
-      },
-    });
-    return response.json();
-  }
-
-  const { data: rooms } = useQuery("none-furnished-rooms", fetchRooms);
+  const { data: rooms } = useQuery("none-furnished-rooms", getNoneFurnishedRooms);
 
   return (
     <Rooms header="None Furnished Rooms" rooms={rooms?.data} />
