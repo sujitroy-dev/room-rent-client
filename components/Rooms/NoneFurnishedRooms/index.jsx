@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Rooms from "../Rooms";
 import { useQuery } from "react-query";
-import token from "@/data/token";
+import token from "@/services/auth";
 
 export default function NoneFurnishedRooms() {
   async function fetchRooms() {
