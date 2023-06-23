@@ -2,12 +2,18 @@ import RoomCard from "@/components/Rooms/RoomCard/RoomCard";
 import styles from "./index.module.scss";
 import WithoutSearchLayout from "@/layouts/WithoutSearchLayout/WithoutSearchLayout";
 import { useQuery } from "react-query";
-import { getWishlist } from "@/services/apiClients/rooms";
-// import token from "@/services/token";
+import { getWishlist, likeRoom, dislikeRoom } from "@/services/apiClients/rooms";
+import Image from "next/image";
+import { AiFillHeart, AiFillStar, AiOutlineHeart } from "react-icons/ai";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { makeAuthFormVisible } from '@/redux/features/layout/layoutSlice.js'
+import token from "@/services/auth";
+import { toast } from "react-toastify";
 
 export default function Wishlist() {
   const { data: rooms } = useQuery("wishlist-rooms", getWishlist);
-  
+
   return (
     <WithoutSearchLayout>
       <div className={styles.wishlist}>
@@ -28,7 +34,51 @@ export default function Wishlist() {
             liked={true}
           />
         ))}
+
       </div>
     </WithoutSearchLayout>
+  );
+}
+
+
+function WishListButton({ liked, id }) {
+  const [isLiked, setLiked] = useState(liked);
+  const dispatchGlob = useDispatch();
+  const showAuthFormFunc = () => dispatchGlob(makeAuthFormVisible());
+
+
+  async function likeFunction() {
+    const data = await likeRoom(id);
+    
+    if (data.success) {
+      setLiked(true);
+      toast.success(data.message);
+    }
+    return data;
+  }
+  async function dislikeFunction() {
+    const data = await dislikeRoom(id);
+
+    if (data.success) {
+      setLiked(false);
+      toast.success(data.message)
+    }
+    return data;
+  }
+  
+  function handleLikeDislike() {
+    if(!token) return showAuthFormFunc();
+    if(isLiked) return dislikeFunction();
+    return likeFunction();
+  }
+  
+  return (
+    <div onClick={handleLikeDislike} >
+      {isLiked ? (
+        <AiFillHeart size="25px" className="text-red" />
+      ) : (
+        <AiOutlineHeart size="25px" className="text-red p-2" />
+      )}
+    </div>
   );
 }
