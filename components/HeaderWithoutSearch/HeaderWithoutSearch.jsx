@@ -24,24 +24,26 @@ export default function HeaderWithoutSearch() {
   return (
     <div>
       <header className={styles.header}>
-        <div className={styles.header__wrapper}>
-          <Link href="/" className={styles.header__logo}>
-            Room Rent
-          </Link>
-          <div className={styles["cta-container"]}>
-            <Link href="/wishlist">
-              <AiFillHeart size="25px" className={styles["wishlist-icon"]} />
+        <div className="container m-auto">
+          <div className={styles.header__wrapper}>
+            <Link href="/" className={styles.header__logo}>
+              Room Rent
             </Link>
-            {!isLoggedIn ? (
-              <div
-                className={styles["registier-login"]}
-                onClick={showAuthFormFunc}
-              >
-                Login
-              </div>
-            ) : (
-              <RiUser6Fill size="41px" className={styles["user-icon"]} />
-            )}
+            <div className={styles["cta-container"]}>
+              <Link href="/wishlist">
+                <AiFillHeart size="25px" className={styles["wishlist-icon"]} />
+              </Link>
+              {!isLoggedIn ? (
+                <div
+                  className={styles["registier-login"]}
+                  onClick={showAuthFormFunc}
+                >
+                  Login
+                </div>
+              ) : (
+                <RiUser6Fill size="41px" className={styles["user-icon"]} />
+              )}
+            </div>
           </div>
         </div>
       </header>
