@@ -16,25 +16,27 @@ export default function Wishlist() {
 
   return (
     <WithoutSearchLayout>
-      <div className={styles.wishlist}>
-        {rooms?.data?.map((room) => (
-          <RoomCard
-            key={room._id}
-            id={room._id}
-            title={room.title}
-            rent={room.rent_amount}
-            currency={room.currency}
-            deposit={room.deposit}
-            security={room.security_amount}
-            postedTime={room.postedTime}
-            images={room.pictures?.[0]}
-            location={room.location}
-            apartment_type={room.apartment_type}
-            path={`/room/${room._id}`}
-            liked={true}
-          />
-        ))}
+      <div className="container m-auto">
+        <div className={styles.wishlist}>
+          {rooms?.data?.map((room) => (
+            <RoomCard
+              key={room._id}
+              id={room._id}
+              title={room.title}
+              rent={room.rent_amount}
+              currency={room.currency}
+              deposit={room.deposit}
+              security={room.security_amount}
+              postedTime={room.postedTime}
+              images={room.pictures?.[0]}
+              location={room.location}
+              apartment_type={room.apartment_type}
+              path={`/room/${room._id}`}
+              liked={true}
+            />
+          ))}
 
+        </div>
       </div>
     </WithoutSearchLayout>
   );
@@ -49,7 +51,7 @@ function WishListButton({ liked, id }) {
 
   async function likeFunction() {
     const data = await likeRoom(id);
-    
+
     if (data.success) {
       setLiked(true);
       toast.success(data.message);
@@ -65,13 +67,13 @@ function WishListButton({ liked, id }) {
     }
     return data;
   }
-  
+
   function handleLikeDislike() {
-    if(!token) return showAuthFormFunc();
-    if(isLiked) return dislikeFunction();
+    if (!token) return showAuthFormFunc();
+    if (isLiked) return dislikeFunction();
     return likeFunction();
   }
-  
+
   return (
     <div onClick={handleLikeDislike} >
       {isLiked ? (
