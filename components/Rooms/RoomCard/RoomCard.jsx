@@ -55,7 +55,7 @@ export default function RoomCard({
   );
 }
 
-function WishListButton({ liked, id }) {
+export function WishListButton({ liked, id }) {
   const [isLiked, setLiked] = useState(liked);
   const dispatchGlob = useDispatch();
   const showAuthFormFunc = () => dispatchGlob(makeAuthFormVisible());

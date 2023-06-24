@@ -194,6 +194,50 @@ const settings = {
 export default function Rooms({ header, rooms = [] }) {
   const CarouselRef = useRef(null);
 
+  // return (
+  //   <div className={styles.rooms}>
+  //     <h2 className={styles.title}>{header}</h2>
+  //     <div className={styles.rooms__container}>
+  //       <div
+  //         className={styles["next-slide-btn"]}
+  //         onClick={() => CarouselRef?.current?.slickNext()}
+  //       >
+  //         <GrLinkNext />
+  //       </div>
+  //       <div
+  //         className={styles["prev-slide-btn"]}
+  //         onClick={() => CarouselRef?.current?.slickPrev()}
+  //       >
+  //         <GrLinkPrevious />
+  //       </div>
+  //       {(rooms.length !==0)?<Slider {...settings} ref={CarouselRef}>
+  //             {rooms.map((room) => (
+  //               <RoomCard
+  //                 key={room._id}
+  //                 id={room._id}
+  //                 title={room.title}
+  //                 rent={room.rent_amount}
+  //                 currency={room.currency}
+  //                 deposit={room.deposit}
+  //                 security={room.security_amount}
+  //                 postedTime={room.postedTime}
+  //                 images={room.pictures?.[0]}
+  //                 location={room.location}
+  //                 apartment_type={room.apartment_type}
+  //                 path={`/room/${room._id}`}
+  //                 liked={room.like}
+  //               />
+  //             ))}
+  //       </Slider>:
+  //       <Slider {...settings} ref={CarouselRef}>
+  //           <ShimmerRoomCard />
+  //           <ShimmerRoomCard />
+  //           <ShimmerRoomCard />
+  //           <ShimmerRoomCard />
+  //       </Slider>}
+  //     </div>
+  //   </div>
+  // );
   return (
     <div className={styles.rooms}>
       <h2 className={styles.title}>{header}</h2>
