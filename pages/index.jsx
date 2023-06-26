@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import styles from "./index.module.scss";
 import Head from "next/head";
-import WithoutSearchLayout from "@/layouts/WithoutSearch/WithoutSearchLayout";
+import WithoutSearchLayout from "@/layouts/Default";
 import { GoSearch } from "react-icons/go";
 import ListYourProperty from "@/components/ListYourProperty/ListYourProperty";
 import RecentlyListedRooms from "@/components/Rooms/RecentlyListedRooms";

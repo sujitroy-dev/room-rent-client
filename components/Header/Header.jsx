@@ -1,61 +1,43 @@
 "use client";
-import styles from "./Header.module.scss";
 import Link from "next/link";
-import { AiFillHeart } from "react-icons/ai";
-import { RiUser6Fill } from "react-icons/ri";
-import { useDispatch } from "react-redux";
-import { makeAuthFormVisible } from "@/redux/features/layout/layoutSlice.js";
 import { useEffect, useState } from "react";
-import { GoSearch } from "react-icons/go";
+import { useDispatch } from "react-redux";
+import { showRegistierForm, showLoginForm } from "@/redux/features/layout/layoutSlice.js";
 import token from "@/services/auth";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+
 
 export default function HeaderWithoutSearch() {
   const dispatch = useDispatch();
-  const showAuthFormFunc = () => dispatch(makeAuthFormVisible());
   const [isLoggedIn, setLoggedIn] = useState(null);
-
+  const router = useRouter();
+  
   useEffect(() => {
     if (token) {
-      return setLoggedIn(true);
-    } else {
+      return setLoggedIn(true)
+    }else{
       return setLoggedIn(false);
     }
   }, [token]);
 
-  function handleSearchSubmit() {
-    e.preventDefault();
+  function logoutHandler() {
+    Cookies.remove("token");
+    localStorage.removeItem("token");
+    router.refresh();
   }
 
   return (
-    <div>
-      <header className={styles.header}>
-        <div className={styles.header__wrapper}>
-          <Link href="/" className={styles.header__logo}>
-            Room Rent
-          </Link>
-          <form className={styles.header__search} onSubmit={handleSearchSubmit}>
-            <input type="text" placeholder="Search..." />
-            <button>
-              <GoSearch size="25px" className={styles["search-icon"]} />
-            </button>
-          </form>
-          <div className={styles["cta-container"]}>
-            <Link href="/">
-              <AiFillHeart size="25px" className={styles["wishlist-icon"]} />
-            </Link>
-            {!isLoggedIn ? (
-              <div
-                className={styles["registier-login"]}
-                onClick={showAuthFormFunc}
-              >
-                Login
-              </div>
-            ) : (
-              <RiUser6Fill size="41px" className={styles["user-icon"]} />
-            )}
-          </div>
+    <header className="w-full shadow-md bg-white fixed z-[1000]">
+      <div className="container m-auto py-5 flex itmes-center justify-between">
+        <Link href="/" className="text-3xl text-dark font-semibold">Room Rent</Link>
+        <div className="flex items-center gap-4">
+          {!isLoggedIn ? <>
+            <button className="border border-dark bg-darkest-blue text-dark py-2 px-5 font-medium rounded-md" onClick={()=>dispatch(showLoginForm())}>Loign</button>
+            <button className="border border-dark bg-dark text-white py-2 px-5 font-medium rounded-md" onClick={()=>dispatch(showRegistierForm())}>Sign up</button>
+          </>:<button className="border border-dark bg-dark text-white py-2 px-5 font-medium rounded-md" onClick={logoutHandler}>Logout</button>}
         </div>
-      </header>
-    </div>
+      </div>
+    </header>
   );
 }

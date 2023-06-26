@@ -1,6 +1,6 @@
 import RoomCard from "@/components/Rooms/RoomCard/RoomCard";
 import styles from "./index.module.scss";
-import WithoutSearchLayout from "@/layouts/WithoutSearch/WithoutSearchLayout";
+import WithoutSearchLayout from "@/layouts/Default";
 import { useQuery } from "react-query";
 import { getWishlist, likeRoom, dislikeRoom } from "@/services/apiClients/rooms";
 import Image from "next/image";
