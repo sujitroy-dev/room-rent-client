@@ -8,9 +8,13 @@
 :root {
   --max-width: 1250px;
   --border-radius: 12px;
-  --primary-bg: #F6F1F1;
-  --secondary-bg: #146C94;
   --primary-font: 'Montserrat', sans-serif;
+
+  // --darkest-blue: #03045E;
+  // --dark-blue: #0077B6;
+  // --blue: #00B4D8;
+  // --light-blue: #90E0EF;
+  // --lightest-blue: #CAF0F8;
 }
 
 * {
@@ -27,7 +31,6 @@ body {
 }
 
 body {
-  background: var(--primary-bg);
   font-family: var(--primary-font);
 }
 

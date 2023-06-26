@@ -49,7 +49,7 @@ export default function RoomCard({
       </div>
       <div className="flex gap-3">
         <div className="w-10 border border-light-gray rounded-md flex items-center justify-center"><WishListButton liked={liked} id={id} /></div>
-        <Link href={path} className="border border-blue rounded-md px-3 py-2 text-center font-medium text-blue flex-1">view details</Link>
+        <Link href={path} className="border border-light-gray rounded-md px-3 py-2 text-center font-medium text-gray-500 flex-1">view details</Link>
       </div>
     </div>
   );
