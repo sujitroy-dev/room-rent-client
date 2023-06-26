@@ -27,7 +27,9 @@ export default function Home(props) {
       <main>
         <WithoutSearchLayout>
           <section className={styles["hero-section"]}>
-            <h2 className="text-6xl text-center text-white font-bold mb-14">Find Perfect Room for free</h2>
+            <h2 className={styles["hero-section__title"]}>
+              Find Perfect Room for free
+            </h2>
             <from className={styles['search']} onSubmit={handleSearchSubmit}>
               <input
                 type="text"

@@ -9,7 +9,7 @@ export default function WithoutSearchLayout({ children }) {
     <>
       <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         <HeaderWithoutSearch showLoginFunc={() => setOpen(true)} />
-        <main style={{ flex: 1 }} className="pt-[82px]">{children}</main>
+        <main style={{ flex: 1 }}>{children}</main>
         <Footer />
       </div>
       <AuthForm />
