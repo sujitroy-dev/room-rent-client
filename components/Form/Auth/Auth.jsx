@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./Auth.module.scss";
 import RegistierForm from "./RegistierForm/RegistierForm";
 import LoginForm from "./LoginForm/LoginForm";
