@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from 'react-redux'
-import { makeAuthFormVisible } from '@/redux/features/layout/layoutSlice.js'
+import { showLoginForm } from '@/redux/features/layout/layoutSlice.js'
 import {
   AiFillHeart,
   AiFillStar,
@@ -58,7 +58,7 @@ export default function RoomCard({
 export function WishListButton({ liked, id }) {
   const [isLiked, setLiked] = useState(liked);
   const dispatchGlob = useDispatch();
-  const showAuthFormFunc = () => dispatchGlob(makeAuthFormVisible());
+  const showAuthFormFunc = () => dispatchGlob(showLoginForm());
 
 
   async function likeFunction() {
