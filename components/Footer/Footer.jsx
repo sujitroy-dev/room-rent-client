@@ -18,7 +18,7 @@ export default function Footer() {
           </p>
         </div>
         <div className={styles.footer__top__col}>
-          <h6 className={styles.footer__title}>About</h6>
+          <div className={styles.footer__title}>About</div>
           <ul className={styles.footer__top__col__items}>
             <li>
               <Link href="/">Home</Link>
@@ -38,7 +38,7 @@ export default function Footer() {
           </ul>
         </div>
         <div className={styles.footer__top__col}>
-          <h6 className={styles.footer__title}>Connect with us</h6>
+          <div className={styles.footer__title}>Connect with us</div>
           <ul className={styles.footer__top__col__items}>
             <li>
               <Link href="/">

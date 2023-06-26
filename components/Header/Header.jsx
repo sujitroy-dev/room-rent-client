@@ -4,10 +4,6 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { showRegistierForm, showLoginForm } from "@/redux/features/layout/layoutSlice.js";
 import token from "@/services/auth";
-import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
-import { AiFillHeart } from "react-icons/ai";
-
 
 export default function HeaderWithoutSearch() {
   const dispatch = useDispatch();
@@ -29,25 +25,35 @@ export default function HeaderWithoutSearch() {
   }
 
   return (
-    <header className="w-full shadow-md bg-white fixed z-[1000]">
-      <div className="container m-auto py-5 flex itmes-center justify-between">
-        <Link href="/" className="text-3xl text-dark font-semibold">Room Rent</Link>
-        <div className="flex items-center gap-4">
-          {!isLoggedIn ? <>
-            <button className="border border-dark bg-darkest-blue text-dark py-2 px-5 font-medium rounded-md" onClick={()=>dispatch(showLoginForm())}>Loign</button>
-            <button className="border border-dark bg-dark text-white py-2 px-5 font-medium rounded-md" onClick={()=>dispatch(showRegistierForm())}>Sign up</button>
-          </>:
-          <>
-          <Link href="/wishlist" className="flex gap-2 mr-4 items-center">
-            {/* <AiFillHeart size="25px" className="text-red border border-dark text-6 rounded-md w-10 h-10 p-1"/> */}
-            <AiFillHeart size="25px" className="text-red"/>
-            <span>Wishlist</span>
+    <div>
+      <header className={styles.header}>
+        <div className={styles.header__wrapper}>
+          <Link href="/" className={styles.header__logo}>
+            Room Rent
           </Link>
-            <button className="border border-dark bg-dark text-white py-2 px-5 font-medium rounded-md" onClick={logoutHandler}>Logout</button>
-          </>
-          }
+          <form className={styles.header__search} onSubmit={handleSearchSubmit}>
+            <input type="text" placeholder="Search..." />
+            <button>
+              <GoSearch size="25px" className={styles["search-icon"]} />
+            </button>
+          </form>
+          <div className={styles["cta-container"]}>
+            <Link href="/">
+              <AiFillHeart size="25px" className={styles["wishlist-icon"]} />
+            </Link>
+            {!isLoggedIn ? (
+              <div
+                className={styles["registier-login"]}
+                onClick={showAuthFormFunc}
+              >
+                Login
+              </div>
+            ) : (
+              <RiUser6Fill size="41px" className={styles["user-icon"]} />
+            )}
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </div>
   );
 }

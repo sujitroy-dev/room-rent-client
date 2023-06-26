@@ -40,6 +40,7 @@ export default function Home(props) {
                 <GoSearch
                   size="35px"
                   className={styles["search-icon"]}
+                  aria-label="search rooms"
                 />
               </button>
             </from>
