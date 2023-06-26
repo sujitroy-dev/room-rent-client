@@ -1,16 +1,12 @@
 "use client";
-import styles from "./HeaderWithoutSearch.module.scss";
 import Link from "next/link";
-import { AiFillHeart } from "react-icons/ai";
-import { RiUser6Fill } from "react-icons/ri";
-import { useDispatch } from "react-redux";
-import { makeAuthFormVisible } from "@/redux/features/layout/layoutSlice.js";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { showRegistierForm, showLoginForm } from "@/redux/features/layout/layoutSlice.js";
 import token from "@/services/auth";
 
 export default function HeaderWithoutSearch() {
   const dispatch = useDispatch();
-  const showAuthFormFunc = () => dispatch(makeAuthFormVisible());
   const [isLoggedIn, setLoggedIn] = useState(null);
   
   useEffect(() => {
@@ -22,31 +18,16 @@ export default function HeaderWithoutSearch() {
   }, [token]);
 
   return (
-    <div>
-      <header className={styles.header}>
-        <div className="container m-auto">
-          <div className={styles.header__wrapper}>
-            <Link href="/" className={styles.header__logo}>
-              Room Rent
-            </Link>
-            <div className={styles["cta-container"]}>
-              <Link href="/wishlist">
-                <AiFillHeart size="25px" className={styles["wishlist-icon"]} />
-              </Link>
-              {!isLoggedIn ? (
-                <div
-                  className={styles["registier-login"]}
-                  onClick={showAuthFormFunc}
-                >
-                  Login
-                </div>
-              ) : (
-                <RiUser6Fill size="41px" className={styles["user-icon"]} />
-              )}
-            </div>
-          </div>
+    <header className="w-full shadow-md bg-white fixed z-[100]">
+      <div className="container m-auto py-5 flex itmes-center justify-between">
+        <Link href="/" className="text-3xl text-dark font-semibold">Room Rent</Link>
+        <div className="flex items-center gap-4">
+          {isLoggedIn ? <>
+            <button className="border border-dark bg-darkest-blue text-dark py-2 px-5 font-medium rounded-md" onClick={()=>dispatch(showLoginForm())}>Loign</button>
+            <button className="border border-dark bg-dark text-white py-2 px-5 font-medium rounded-md" onClick={()=>dispatch(showRegistierForm())}>Sign up</button>
+          </>:<button className="border border-dark bg-dark text-white py-2 px-5 font-medium rounded-md">Logout</button>}
         </div>
-      </header>
-    </div>
+      </div>
+    </header>
   );
 }

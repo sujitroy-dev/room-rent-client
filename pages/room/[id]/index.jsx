@@ -1,6 +1,6 @@
 import styles from './index.module.css';
 import { useQuery } from "react-query";
-import WithoutSearchLayout from "@/layouts/WithoutSearchLayout/WithoutSearchLayout";
+import WithoutSearchLayout from "@/layouts/WithoutSearch/WithoutSearchLayout";
 import { getSingleRoom } from '@/services/apiClients/rooms';
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import Image from 'next/image';

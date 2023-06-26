@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import styles from "./index.module.scss";
 import Head from "next/head";
-import WithoutSearchLayout from "@/layouts/WithoutSearchLayout/WithoutSearchLayout";
+import WithoutSearchLayout from "@/layouts/WithoutSearch/WithoutSearchLayout";
 import { GoSearch } from "react-icons/go";
 import ListYourProperty from "@/components/ListYourProperty/ListYourProperty";
 import RecentlyListedRooms from "@/components/Rooms/RecentlyListedRooms";
@@ -9,7 +9,6 @@ import FullFurnishedRooms from "@/components/Rooms/FullFurnishedRooms";
 import SemiFurnishedRooms from "@/components/Rooms/SemiFurnishedRooms";
 import NoneFurnishedRooms from "@/components/Rooms/NoneFurnishedRooms";
 import Testimonials from "@/components/Testimonials/Testimonials";
-
 
 export default function Home(props) {
   const inputRef = useRef("");
