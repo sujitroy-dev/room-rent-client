@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
 import Rooms from "../Rooms";
 import { useQuery } from "react-query";
 import { getRecentRooms } from "@/services/apiClients/rooms";
 
-export default function RecentlyListedRooms() {
+export default function SimilarListedRooms() {
   const { data: rooms } = useQuery("recent-furnished-rooms", getRecentRooms);
 
-  return <Rooms header="Recently Listed" rooms={rooms?.data} />;
+  return <Rooms header="Similar Rooms" rooms={rooms?.data} />;
 }

@@ -34,3 +34,40 @@
 .next-slide-btn {
   right: -55px;
 }
+
+
+// simmer effect card
+.testimonials-shimmer{
+  background: #fff;
+  margin: 16px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 35px 20px;
+  box-shadow: -7px 15px hsla(0,2%,88%,.657);
+  border-radius: 12px;
+
+  .image{
+    width: 65px;
+    height: 65px;
+    margin-bottom: 15px;
+    border-radius: 50%;
+  }
+  .name{
+    width: 145px;
+    height: 21.5px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+  .message{
+    width: 345px;
+    height: 44px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+  .designation{
+    width: 145px;
+    height: 16.5px;
+    border-radius: 12px;
+  }
+}

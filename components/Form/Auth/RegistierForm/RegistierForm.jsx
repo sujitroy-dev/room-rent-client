@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { hideAuthForm } from '@/redux/features/layout/layoutSlice.js';
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const initialForm = {
   name: "",
@@ -47,12 +48,12 @@ export default function RegistierForm({ changeFormTypeFunc }) {
       });
       const responseData = await response.json();
       if(responseData.success) {
-        localStorage.setItem("token", responseData.token);
+        Cookies.set("token", responseData.token);
         hideAuthFormFunc();
-        router.refresh();
+        return router.refresh();
       }
-      toast.error(responseData.message)
       dispatch({ type: "clear_form"})
+      return toast.error(responseData.message)
     } catch (error) {
       console.log(error);
     }
