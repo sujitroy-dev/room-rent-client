@@ -1,5 +1,4 @@
 "use client";
-import styles from "./RegistierForm.module.scss";
 import { useReducer } from "react";
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
@@ -64,10 +63,10 @@ export default function RegistierForm({ changeFormTypeFunc }) {
   };
 
   return (
-      <div className={styles.form__container}>
-        <h2>Register</h2>
-        <form onSubmit={submitRegistrationForm}>
-          <label className={`${styles["full-w-label"]}`}>
+      <div className={`fixed position-center z-[2001] w-[480px] bg-white p-8 rounded-md`}>
+        <h2 className="text-4xl font-semibold text-center mb-6">Register</h2>
+        <form onSubmit={submitRegistrationForm} className="grid grid-cols-1 gap-4">
+          <label className="flex flex-col gap-1">
             Full Name :
             <input
               type="text"
@@ -78,9 +77,10 @@ export default function RegistierForm({ changeFormTypeFunc }) {
               onChange={(e) =>
                 dispatch({ type: "update_name", payload: e.target.value })
               }
+              className="p-3 bg-gray-100 rounded-md border border-light-gray"
             />
           </label>
-          <label className={`${styles["full-w-label"]}`}>
+          <label className="flex flex-col gap-1">
             Eamil :
             <input
               type="email"
@@ -91,9 +91,10 @@ export default function RegistierForm({ changeFormTypeFunc }) {
               onChange={(e) =>
                 dispatch({ type: "update_email", payload: e.target.value })
               }
+              className="p-3 bg-gray-100 rounded-md border border-light-gray"
             />
           </label>
-          <label className={`${styles["full-w-label"]}`}>
+          <label className="flex flex-col gap-1">
             Password :
             <input
               type="password"
@@ -104,9 +105,10 @@ export default function RegistierForm({ changeFormTypeFunc }) {
               onChange={(e) =>
                 dispatch({ type: "update_password", payload: e.target.value })
               }
+              className="p-3 bg-gray-100 rounded-md border border-light-gray"
             />
           </label>
-          <label className={`${styles["full-w-label"]}`}>
+          <label className="flex flex-col gap-1">
             Selete Account Type :
             <select
               value={formState.user_type}
@@ -116,19 +118,20 @@ export default function RegistierForm({ changeFormTypeFunc }) {
                   payload: e.target.value,
                 })
               }
+              className="p-3 bg-gray-100 rounded-md border border-light-gray"
             >
               <option value="customer">Customer</option>
               <option value="landlord">Landlord</option>
               <option value="agent">Agent</option>
             </select>
           </label>
-          <button type="submit" className={`${styles["full-w-label"]}`}>
+          <button type="submit" className="font-medium bg-black text-white py-3 px-6 rounded-md mt-3 mb-8">
             Submit
           </button>
         </form>
-        <p className={styles["more-actions"]}>
+        <p className="text-center">
           Already Registiered?{" "}
-          <span onClick={() => changeFormTypeFunc("login")}>Login</span>
+          <span className="font-medium underline" onClick={() => changeFormTypeFunc("login")}>Login</span>
         </p>
       </div>
   );

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import styles from "./LoginForm.module.scss";
 import { toast } from "react-toastify";
 import { useDispatch } from 'react-redux'
 import { hideAuthForm } from '@/redux/features/layout/layoutSlice.js'
@@ -45,10 +44,10 @@ export default function LoginForm({ changeFormTypeFunc }) {
   }
 
   return (
-    <div className={styles.form__container}>
-      <h2>Login</h2>
-      <form onSubmit={submitLoginForm}>
-        <label className={`${styles["full-w-label"]}`}>
+    <div className={`fixed position-center z-[2001] w-[480px] bg-white p-8 rounded-md`}>
+      <h2 className="text-4xl font-semibold text-center mb-6">Login</h2>
+      <form onSubmit={submitLoginForm} className="grid grid-cols-1 gap-4">
+        <label className="flex flex-col gap-1">
           Eamil :
           <input
             type="email"
@@ -57,9 +56,10 @@ export default function LoginForm({ changeFormTypeFunc }) {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="p-3 bg-gray-100 rounded-md border border-light-gray"
           />
         </label>
-        <label className={`${styles["full-w-label"]}`}>
+        <label className="flex flex-col gap-1">
           Password :
           <input
             type="password"
@@ -68,15 +68,16 @@ export default function LoginForm({ changeFormTypeFunc }) {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="p-3 bg-gray-100 rounded-md border border-light-gray"
           />
         </label>
-        <button type="submit" className={`${styles["full-w-label"]}`}>
+        <button type="submit" className="font-medium bg-black text-white py-3 px-6 rounded-md mt-3 mb-8">
           Submit
         </button>
       </form>
-      <p className={styles["more-actions"]}>
+      <p className="text-center">
         Not Registered yet?{" "}
-        <span onClick={() => changeFormTypeFunc("register")}>Register</span>
+        <span className="font-medium underline" onClick={() => changeFormTypeFunc("register")}>Register</span>
       </p>
     </div>
   );

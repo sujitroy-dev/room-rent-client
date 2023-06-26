@@ -10,7 +10,7 @@ const settings = {
   infinite: false,
   initialSlide: 0,
   speed: 500,
-  slidesToShow: 3,
+  slidesToShow: 4,
   slidesToScroll: 1,
   responsive: [
     {
@@ -43,7 +43,7 @@ export default function Testimonials() {
   return (
     <div className={styles.testimonials}>
       <h2 className={styles.testimonials__title}>Testimonials</h2>
-      <div className={styles.testimonials__container}>
+      <div className={`${styles.testimonials__container} container m-auto`}>
         <div
           className={styles["next-slide-btn"]}
           onClick={() => CarouselRef?.current?.slickNext()}
