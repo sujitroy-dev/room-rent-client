@@ -6,6 +6,7 @@ import { showRegistierForm, showLoginForm } from "@/redux/features/layout/layout
 import token from "@/services/auth";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { AiFillHeart } from "react-icons/ai";
 
 
 export default function HeaderWithoutSearch() {
@@ -35,7 +36,16 @@ export default function HeaderWithoutSearch() {
           {!isLoggedIn ? <>
             <button className="border border-dark bg-darkest-blue text-dark py-2 px-5 font-medium rounded-md" onClick={()=>dispatch(showLoginForm())}>Loign</button>
             <button className="border border-dark bg-dark text-white py-2 px-5 font-medium rounded-md" onClick={()=>dispatch(showRegistierForm())}>Sign up</button>
-          </>:<button className="border border-dark bg-dark text-white py-2 px-5 font-medium rounded-md" onClick={logoutHandler}>Logout</button>}
+          </>:
+          <>
+          <Link href="/wishlist" className="flex gap-2 mr-4 items-center">
+            {/* <AiFillHeart size="25px" className="text-red border border-dark text-6 rounded-md w-10 h-10 p-1"/> */}
+            <AiFillHeart size="25px" className="text-red"/>
+            <span>Wishlist</span>
+          </Link>
+            <button className="border border-dark bg-dark text-white py-2 px-5 font-medium rounded-md" onClick={logoutHandler}>Logout</button>
+          </>
+          }
         </div>
       </div>
     </header>
