@@ -1,108 +1,207 @@
-import styles from './index.module.css';
 import { useQuery } from "react-query";
 import WithoutSearchLayout from "@/layouts/Default";
-import { getSingleRoom } from '@/services/apiClients/rooms';
-import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
-import Image from 'next/image';
+import { getSingleRoom } from "@/services/apiClients/rooms";
+import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
+import Image from "next/image";
 import Slider from "react-slick";
-import rentIcon from '/assets/icons/png/rent.png';
-import floorIcon from '/assets/icons/png/apartment.png';
-import liftIcon from '/assets/icons/png/elevator.png';
-import blaconyIcon from '/assets/icons/png/balcony.png';
-import agentIcon from '/assets/icons/png/agent.png';
-import securityAmountIcon from '/assets/icons/png/lease.png';
-import { WishListButton } from '@/components/Rooms/RoomCard/RoomCard';
-import token from '@/services/auth';
-import { makeAuthFormVisible } from '@/redux/features/layout/layoutSlice.js'
-import { useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
-import SimilarListedRooms from '@/components/Rooms/SimilarRooms';
-
+import { WishListButton } from "@/components/Rooms/RoomCard/RoomCard";
+import token from "@/services/auth";
+import { showLoginForm } from "@/redux/features/layout/layoutSlice.js";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import SimilarListedRooms from "@/components/Rooms/SimilarRooms";
+import { AiFillStar, AiFillCar } from "react-icons/ai";
+import { BsBuilding } from "react-icons/bs";
+import { GiWindow } from "react-icons/gi";
+import { MdOutlineElevator } from "react-icons/md";
+import { FaDog } from "react-icons/fa";
+import { BiChat } from "react-icons/bi";
+import { useEffect, useRef, useState } from "react";
+import { BiArrowBack } from "react-icons/bi";
 
 export default function RoomPage({ id }) {
   const { data: room } = useQuery(`room-${id}`, () => getSingleRoom(id));
 
+  const [nav1, setNav1] = useState(null);
+  const [nav2, setNav2] = useState(null);
+  const slider1Ref = useRef(null);
+  const slider2Ref = useRef(null);
+
   const settings = {
-    dots: true,
-    infinite: true,
+    dots: false,
+    infinite: false,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToScroll: 1,
   };
-
+  const settings2 = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+  };
   const dispatch = useDispatch();
-  const showAuthFormFunc = () => dispatch(makeAuthFormVisible());
 
   function handleAskForBooking() {
-    if (!token) return showAuthFormFunc();
-    toast.success("Request send for booking")
+    if (!token) return dispatch(showLoginForm());
+    toast.success("Request send for booking");
   }
 
-
+  useEffect(() => {
+    setNav1(slider1Ref.current);
+    setNav2(slider2Ref.current);
+  }, []);
   return (
     <WithoutSearchLayout>
       <div className="container m-auto">
         <Breadcrumb />
-        <div className="grid grid-cols-2 gap-14 mb-20">
-          <Slider {...settings}>
-            {
-              room?.data?.pictures?.map(item => {
+        <div className="grid grid-cols-5 gap-14 mb-20">
+          <div className="col-span-3">
+            <Slider {...settings} asNavFor={nav2} ref={slider1Ref}>
+              {room?.data?.pictures?.map((item) => {
                 return (
-                  <Image src={room?.data?.pictures?.[0]} width={800} height={800} className='rounded-xl w-[800px] h-full' />
-                )
-              })
-            }
-          </Slider>
-          <div className="rounded-xl">
-            <h1 className="text-2xl font-semibold mb-4">{room?.data?.title}</h1>
-            <p className="text-md leading-loose mb-12 text-light-black">{room?.data?.description}</p>
-            <div className="mb-12 flex gap-3">
-              <button className='flex-1 p-3 border-2 font-semibold rounded-md border-blue text-blue hover:bg-blue hover:text-white' onClick={handleAskForBooking}>Ask For Booking</button>
-              <div className="w-12 border border-light-gray rounded-md flex items-center justify-center">
-                <WishListButton liked={false} id={id} />
-              </div>
+                  <Image
+                    src={room?.data?.pictures?.[0]}
+                    width={800}
+                    height={800}
+                    className="rounded-xl w-[800px] h-full"
+                  />
+                );
+              })}
+            </Slider>
+            <div className="w-full relative">
+              <button className="p-3 rounded-full border-2 border-black bg-white absolute top-12 -left-4 z-10">
+                <BiArrowBack fontSize={20} />
+              </button>
+              <Slider
+                // swipeToSlide
+                // focusOnSelect
+                {...settings2}
+                asNavFor={nav1}
+                ref={slider2Ref}
+                swipeToSlide
+                focusOnSelect
+              >
+                {room?.data?.pictures?.map((item) => {
+                  return (
+                    <Image
+                      src={room?.data?.pictures?.[0]}
+                      width={800}
+                      height={800}
+                      className="rounded-xl w-[800px] h-full px-2 mt-5"
+                    />
+                  );
+                })}
+              </Slider>
+              <button className="p-3 rounded-full border-2 border-black bg-white absolute top-12 -right-4 z-10 rotate-180">
+                <BiArrowBack fontSize={20} />
+              </button>
             </div>
-            <div className="flex flex-wrap gap-5 mb-10">
-              <div className="border border-light-gray py-4 px-6 flex gap-6 items-center rounded-lg shadow-sm">
-                <Image src={rentIcon} alt="" className='w-12' />
-                <div className="flex flex-col gap-1">
-                  <div className="text-sm font-medium">Rent</div>
-                  <div className="text-xl font-semibold">₹ {room?.data?.rent_amount}</div>
+          </div>
+
+          <div className="col-span-2">
+            <div className="shadow-md p-8 rounded-md">
+              <h1 className="text-2xl font-semibold mb-2.5">
+                {room?.data?.title}
+              </h1>
+              <div className="mb-5 flex">
+                <p className="text-md truncate text-light-black">
+                  {room?.data?.description}
+                </p>
+                <span className="text-md text-gray-500 font-medium cursor-pointer">
+                  More
+                </span>
+              </div>
+              <div className="flex justify-between mb-7">
+                <div className="text-2xl font-semibold text-dark">
+                  ₹ {room?.data?.rent_amount} /{" "}
+                  <span className="text-xl font-medium text-light-black">
+                    Month
+                  </span>
+                </div>
+                <div className="text-yellow flex items-center gap-1">
+                  <AiFillStar size="22px" />
+                  <span>4.7</span>
                 </div>
               </div>
-              <div className="border border-light-gray py-4 px-6 flex gap-6 items-center rounded-lg shadow-sm">
-                <Image src={securityAmountIcon} alt="" className='w-12' />
-                <div className="flex flex-col gap-1">
-                  <div className="text-sm font-medium">Security Amount</div>
-                  <div className="text-xl font-semibold">₹ {room?.data?.security_amount}</div>
+              <div className="mb-8">
+                {/* <h4 className="text-lg font-medium mb-3">Required</h4> */}
+                <div className="grid grid-cols-2 mb-5 gap-y-3">
+                  <div className="flex items-center gap-2">
+                    <div className="text-sm font-semibold">Listed by</div>
+                    <div className="">Owner</div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="text-sm font-semibold">Security</div>
+                    <div className="">₹ 1500</div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="text-sm font-semibold">Brokrage</div>
+                    <div className="">₹ 1500</div>
+                  </div>
                 </div>
               </div>
-              <div className="border border-light-gray py-4 px-6 flex gap-6 items-center rounded-lg shadow-sm">
-                <Image src={agentIcon} alt="" className='w-12' />
-                <div className="flex flex-col gap-1">
-                  <div className="text-sm font-medium">Brokrage</div>
-                  <div className="text-xl font-semibold">₹ {room?.data?.brokerage}</div>
-                </div>
-              </div>
-              <div className="border border-light-gray py-4 px-6 flex gap-6 items-center rounded-lg shadow-sm">
-                <Image src={floorIcon} alt="" className='w-12' />
-                <div className="flex flex-col gap-1">
-                  <div className="text-sm font-medium">Floor</div>
-                  <div className="text-xl font-semibold">{room?.data?.floor}</div>
-                </div>
-              </div>
-              <div className="border border-light-gray py-4 px-6 flex gap-6 items-center rounded-lg shadow-sm">
-                <Image src={liftIcon} alt="" className='w-12' />
-                <div className="flex flex-col gap-1">
-                  <div className="text-sm font-medium">Lift</div>
-                  <div className="text-xl font-semibold">{room?.data?.lift ? "Aviaiable" : "Not Available"}</div>
-                </div>
-              </div>
-              <div className="border border-light-gray py-4 px-6 flex gap-6 items-center rounded-lg shadow-sm">
-                <Image src={blaconyIcon} alt="" className='w-12' />
-                <div className="flex flex-col gap-1">
-                  <div className="text-sm font-medium">Balcony</div>
-                  <div className="text-xl font-semibold">{room?.data?.lift ? "Aviaiable" : "Not Available"}</div>
+              <button
+                className="font-medium flex items-center justify-center gap-3 w-full bg-white border-2 border-dark hover:bg-dark text-dark hover:text-white p-3 rounded-md mb-12 transition-all duration-200"
+                onClick={handleAskForBooking}
+              >
+                <span>Talk Now</span>
+                <BiChat fontSize="1.5rem" />
+              </button>
+              <div>
+                <h3 className="text-lg font-semibold mb-3 text-dark">
+                  Amenities
+                </h3>
+                <div className="grid grid-cols-2 gap-y-5 mb-3">
+                  <div className="flex items-center gap-2">
+                    <BsBuilding fontSize="1.5rem" />
+                    <span className="flex-1">
+                      <h5 className="text-sm font-semibold">Floor</h5>
+                      <p className="text-md text-gray-700">
+                        {room?.data?.floor}
+                      </p>
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <GiWindow fontSize="1.65rem" />
+                    <span className="flex-1">
+                      <h5 className="text-sm font-semibold">Balcony</h5>
+                      <p className="text-md text-gray-700">
+                        {room?.data?.balcony ? "Available" : "Not Available"}
+                      </p>
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MdOutlineElevator fontSize="1.7rem" />
+                    <span className="flex-1">
+                      <h5 className="text-sm font-semibold">Lift</h5>
+                      <p className="text-md text-gray-700">
+                        {room?.data?.lift ? "Available" : "Not Available"}
+                      </p>
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <AiFillCar fontSize="1.5rem" />
+                    <span className="flex-1">
+                      <h5 className="text-sm font-semibold">Parking</h5>
+                      <p className="text-md text-gray-700">
+                        {room?.data?.parking || 0}
+                      </p>
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <FaDog fontSize="1.5rem" />
+                    <span className="flex-1">
+                      <h5 className="text-sm font-semibold">Pets</h5>
+                      <p className="text-md text-gray-700">
+                        {room?.data?.floor}
+                      </p>
+                    </span>
+                  </div>
+                  <button className="text-light-black rounded-md text-start font-medium">
+                    Show all
+                  </button>
                 </div>
               </div>
             </div>
@@ -110,7 +209,6 @@ export default function RoomPage({ id }) {
         </div>
         <SimilarListedRooms />
       </div>
-
     </WithoutSearchLayout>
   );
 }

@@ -22,28 +22,28 @@
   display: flex;
   border-radius: 8px;
   overflow: hidden;
-  input {
-    flex: 1;
-    padding: 15px 25px;
-    outline: none;
-    font-size: 1.3rem;
-    border-radius: 0;
-    border: none;
-  }
-  button {
-    display: flex;
-    align-items: center;
-    border-radius: 0;
-    border: none;
-    background: var(--secondary-bg);
-    cursor: pointer;
-    svg {
-      padding: 5px;
-      width: 55px;
-      display: flex;
-      color: white;
-    }
-  }
+  // input {
+  //   flex: 1;
+  //   padding: 15px 25px;
+  //   outline: none;
+  //   font-size: 1.3rem;
+  //   border-radius: 0;
+  //   border: none;
+  // }
+  // button {
+  //   display: flex;
+  //   align-items: center;
+  //   border-radius: 0;
+  //   border: none;
+  //   background: var(--secondary-bg);
+  //   cursor: pointer;
+  //   svg {
+  //     padding: 5px;
+  //     width: 55px;
+  //     display: flex;
+  //     color: white;
+  //   }
+  // }
 }
 
 

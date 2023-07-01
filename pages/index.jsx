@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./index.module.scss";
 import Head from "next/head";
 import WithoutSearchLayout from "@/layouts/Default";
@@ -11,11 +11,34 @@ import NoneFurnishedRooms from "@/components/Rooms/NoneFurnishedRooms";
 import Testimonials from "@/components/Testimonials/Testimonials";
 
 export default function Home(props) {
+  const [ placeholder, setPlaceholder ] = useState("");
   const inputRef = useRef("");
   const [searchInput, setSearchInput] = useState("");
   function handleSearchSubmit() {
     console.log(searchInput);
   }
+
+  const examplePhase = [
+    "1BHK Apartment in Delhi",
+    "1RHK room near me",
+    "Studio room in Banglore",
+  ]
+  
+  useEffect(()=>{
+    // setInterval(() => {
+    //   setPlaceholder(p=>p+1)
+    // }, 1200)
+
+    examplePhase.forEach((sentence, index)=>{
+      [...sentence].forEach(char=>{
+        setTimeout(() => {
+          setPlaceholder(p=>p+char)
+        }, 500);
+      })
+    })
+    
+    
+  },[])
   return (
     <>
       <Head>
@@ -27,23 +50,27 @@ export default function Home(props) {
       <main>
         <WithoutSearchLayout>
           <section className={styles["hero-section"]}>
-            <h2 className="text-6xl text-center text-white font-bold mb-14">Find Perfect Room for free</h2>
-            <from className={styles['search']} onSubmit={handleSearchSubmit}>
-              <input
-                type="text"
-                ref={inputRef}
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                placeholder="Search..."
-              />
-              <button type="submit" onClick={handleSearchSubmit}>
-                <GoSearch
-                  size="35px"
-                  className={styles["search-icon"]}
-                  aria-label="search rooms"
+            <div className="container m-auto">
+              <h2 className="text-6xl text-center text-white font-bold my-14">Find Perfect Room for free</h2>
+              <from className="flex w-1/2 m-auto rounded-md overflow-hidden" onSubmit={handleSearchSubmit}>
+                <input
+                  type="text"
+                  ref={inputRef}
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  placeholder={`Ex.  ${placeholder}`}
+                  className="flex-1 px-5"
                 />
-              </button>
-            </from>
+                <button type="submit" onClick={handleSearchSubmit} className="bg-blue px-6 py-4 text-white font-medium">
+                  {/* <GoSearch
+                    size="35px"
+                    className={styles["search-icon"]}
+                    aria-label="search rooms"
+                  /> */}
+                  Search
+                </button>
+              </from>
+            </div>
           </section>
           <RecentlyListedRooms/>
           <ListYourProperty/>
