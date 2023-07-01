@@ -71,12 +71,13 @@ export default function RoomPage({ id }) {
               })}
             </Slider>
             <div className="w-full relative">
-              <button className="p-3 rounded-full border-2 border-black bg-white absolute top-12 -left-4 z-10">
+              <button
+                className="p-3 rounded-full border-2 border-gray-400 bg-white absolute top-12 -left-4 z-10 text-gray-400"
+                onClick={() => slider2Ref.current.slickPrev()}
+              >
                 <BiArrowBack fontSize={20} />
               </button>
               <Slider
-                // swipeToSlide
-                // focusOnSelect
                 {...settings2}
                 asNavFor={nav1}
                 ref={slider2Ref}
@@ -94,7 +95,10 @@ export default function RoomPage({ id }) {
                   );
                 })}
               </Slider>
-              <button className="p-3 rounded-full border-2 border-black bg-white absolute top-12 -right-4 z-10 rotate-180">
+              <button
+                className="p-3 rounded-full border-2 border-gray-400 bg-white absolute top-12 -right-4 z-10 rotate-180 text-gray-400"
+                onClick={() => slider2Ref.current.slickNext()}
+              >
                 <BiArrowBack fontSize={20} />
               </button>
             </div>
