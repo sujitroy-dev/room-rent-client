@@ -19,7 +19,7 @@ export default function AuthForm() {
   return (
     <AnimatePresence>
       {isAuthFormVisible && (
-        <div className="w-screen h-screen absolute top-0 left-0 z-[20000]">
+        <div className="w-screen h-screen fixed top-0 left-0 z-[20000]">
           <div
             className="w-full h-full absolute top-0 left-0 bg-gray-600/70 z-[2000]"
             onClick={hideAuthFormFunc}
