@@ -1,14 +1,14 @@
-import RegistierForm from "./RegistierForm/RegistierForm";
-import LoginForm from "./LoginForm/LoginForm";
 import { useSelector, useDispatch } from "react-redux";
-import { hideAuthForm } from "@/redux/features/layout/layoutSlice.js";
 import {
   showRegistierForm,
   showLoginForm,
 } from "@/redux/features/layout/layoutSlice.js";
+import { hideAuthForm } from "@/redux/features/layout/layoutSlice.js";
+import LoginForm from "./Login";
+import RegistierForm from "./Registration";
 import { AnimatePresence } from "framer-motion";
 
-export default function AuthForm() {
+export default function UserAuthModal() {
   const dispatch = useDispatch();
   const isAuthFormVisible = useSelector(
     (state) => state.layout.authFormVisible

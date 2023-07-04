@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { motion } from "framer-motion";
 
-export default function LoginForm({ changeFormTypeFunc }) {
+export default function LoginModal({ changeFormTypeFunc }) {
   const router = useRouter();
 
   const [email, setEmail] = useState();

@@ -1,7 +1,7 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Footer from "@/components/Footer/Footer";
-import AuthForm from "@/components/Form/Auth/Auth";
+import AuthModal from "@/components/Modal/Auth/User";
 import Header from "@/components/Header/Header";
 
 export default function DefaultLayout({ children }) {
@@ -12,7 +12,7 @@ export default function DefaultLayout({ children }) {
         <main className="flex-1 mt-20">{children}</main>
         <Footer />
       </div>
-      <AuthForm />
+      <AuthModal />
     </>
   );
 }

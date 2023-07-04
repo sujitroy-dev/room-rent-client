@@ -29,7 +29,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
-export default function RegistierForm({ changeFormTypeFunc }) {
+export default function RegistrationModal({ changeFormTypeFunc }) {
   const router = useRouter();
 
   const [formState, dispatch] = useReducer(reducer, initialForm);
