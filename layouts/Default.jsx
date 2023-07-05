@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Footer from "@/components/Footer/Footer";
 import AuthModal from "@/components/Modal/Auth/User";
 import Header from "@/components/Header/Header";
+import ChatModal from "@/components/Modal/Chat";
 
 export default function DefaultLayout({ children }) {
   return (
@@ -13,6 +14,7 @@ export default function DefaultLayout({ children }) {
         <Footer />
       </div>
       <AuthModal />
+      <ChatModal />
     </>
   );
 }

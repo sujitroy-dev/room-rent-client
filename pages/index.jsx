@@ -11,7 +11,7 @@ import NoneFurnishedRooms from "@/components/Rooms/NoneFurnishedRooms";
 import Testimonials from "@/components/Testimonials/Testimonials";
 
 export default function Home(props) {
-  const [ placeholder, setPlaceholder ] = useState("");
+  const [placeholder, setPlaceholder] = useState("");
   const inputRef = useRef("");
   const [searchInput, setSearchInput] = useState("");
   function handleSearchSubmit() {
@@ -22,23 +22,18 @@ export default function Home(props) {
     "1BHK Apartment in Delhi",
     "1RHK room near me",
     "Studio room in Banglore",
-  ]
-  
-  useEffect(()=>{
-    // setInterval(() => {
-    //   setPlaceholder(p=>p+1)
-    // }, 1200)
+  ];
 
-    examplePhase.forEach((sentence, index)=>{
-      [...sentence].forEach(char=>{
-        setTimeout(() => {
-          setPlaceholder(p=>p+char)
-        }, 500);
-      })
-    })
-    
-    
-  },[])
+  // useEffect(()=>{
+  //   examplePhase.forEach((sentence, index)=>{
+  //     [...sentence].forEach(char=>{
+  //       setTimeout(() => {
+  //         setPlaceholder(p=>p+char)
+  //       }, 500);
+  //     })
+  //   })
+  // },[])
+
   return (
     <>
       <Head>
@@ -51,8 +46,13 @@ export default function Home(props) {
         <WithoutSearchLayout>
           <section className={styles["hero-section"]}>
             <div className="container m-auto">
-              <h2 className="text-6xl text-center text-white font-bold my-14">Find Perfect Room for free</h2>
-              <from className="flex w-1/2 m-auto rounded-md overflow-hidden" onSubmit={handleSearchSubmit}>
+              <h2 className="text-6xl text-center text-white font-bold my-14">
+                Find Perfect Room for free
+              </h2>
+              <from
+                className="flex w-1/2 m-auto rounded-md overflow-hidden"
+                onSubmit={handleSearchSubmit}
+              >
                 <input
                   type="text"
                   ref={inputRef}
@@ -61,7 +61,11 @@ export default function Home(props) {
                   placeholder={`Ex.  ${placeholder}`}
                   className="flex-1 px-5"
                 />
-                <button type="submit" onClick={handleSearchSubmit} className="bg-blue px-6 py-4 text-white font-medium">
+                <button
+                  type="submit"
+                  onClick={handleSearchSubmit}
+                  className="bg-blue px-6 py-4 text-white font-medium"
+                >
                   {/* <GoSearch
                     size="35px"
                     className={styles["search-icon"]}
@@ -72,12 +76,12 @@ export default function Home(props) {
               </from>
             </div>
           </section>
-          <RecentlyListedRooms/>
-          <ListYourProperty/>
-          <FullFurnishedRooms/>
-          <SemiFurnishedRooms/>
-          <NoneFurnishedRooms/>
-          <Testimonials/>
+          <RecentlyListedRooms />
+          <ListYourProperty />
+          <FullFurnishedRooms />
+          <SemiFurnishedRooms />
+          <NoneFurnishedRooms />
+          <Testimonials />
         </WithoutSearchLayout>
       </main>
     </>
