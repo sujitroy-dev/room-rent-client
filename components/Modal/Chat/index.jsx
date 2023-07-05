@@ -6,8 +6,6 @@ import { IoMdSend } from "react-icons/io";
 import token from "@/services/auth";
 
 export default function ChatModal() {
-  const [isLoggedIn, setLoggedIn] = useState(null);
-
   const [state, dispatch] = useReducer(
     (state, action) => {
       if (action.type === "add_message") {
@@ -48,56 +46,93 @@ export default function ChatModal() {
       } else if (action.type === "toggle_open") {
         return {
           ...state,
-          open: action.payload,
+          isModalOpen: action.payload,
         };
       } else if (action.type === "toggle_open") {
         return {
           ...state,
-          open: action.payload,
+          isModalOpen: action.payload,
+        };
+      } else if (action.type === "update_login") {
+        return {
+          ...state,
+          isLoggedIn: action.payload,
+        };
+      } else if (action.type === "change_screen") {
+        return {
+          ...state,
+          screen: action.payload,
         };
       } else {
         return state;
       }
     },
     {
-      open: false,
+      isLoggedIn: false,
+      isModalOpen: true,
+      screen: "messages", // users, messages
       messageInput: "",
       messages: [],
+      users: [
+        {
+          name: "Rajeev Das",
+          lastMessage: "Hey what's up ?",
+        },
+      ],
     }
   );
 
   useEffect(() => {
-    if (token) {
-      return setLoggedIn(true);
-    } else {
-      return setLoggedIn(false);
-    }
+    if (token) return dispatch({ type: "update_login", payload: true });
+    return dispatch({ type: "update_login", payload: false });
   }, [token]);
 
-  if (!isLoggedIn) return <></>;
   return (
-    <div className="fixed bottom-8 right-8 z-[2001] flex items-end flex-col">
+    <div
+      className={`fixed bottom-8 right-8 z-[2001] flex items-end flex-col ${
+        state.isLoggedIn ? "" : "hidden"
+      }`}
+    >
       <div
         className={`${
-          state.open ? "" : "hidden"
+          state.isModalOpen ? "" : "hidden"
         } mb-4 bg-gray-100 rounded-lg p-4 shadow-lg w-[400px] h-[500px] flex flex-col`}
       >
-        <header className="border-b border-gray-300 flex justify-end pb-2 mb-3">
-          <RiMenu3Fill fontSize={20} />
+        <header className="border-b border-gray-300 flex justify-start pb-2 mb-3">
+          <RiMenu3Fill
+            fontSize={20}
+            className="cursor-pointer"
+            onClick={() =>
+              dispatch({ type: "change_screen", payload: "users" })
+            }
+          />
         </header>
-        <div className="flex flex-col gap-y-2 flex-1 justify-end">
-          {state.messages.map((message) => (
-            <span
-              className={`bg-gray-200 text-dark text-sm py-2 px-4 rounded-full ${
-                message.isMe ? "self-end" : "self-start"
-              }`}
-            >
-              {message.message}
-            </span>
-          ))}
+        <div
+          className={`${
+            state.screen === "messages" ? "" : "hidden"
+          } flex-1 overflow-y-auto`}
+        >
+          <div className="flex flex-col gap-y-2 justify-end h-full">
+            {state.messages.map((message) => (
+              <span
+                className={`bg-gray-200 text-dark text-sm py-2 px-4 rounded-full ${
+                  message.isMe ? "self-end" : "self-start"
+                }`}
+              >
+                {message.message}
+              </span>
+            ))}
+          </div>
         </div>
+        <div
+          className={`flex flex-col gap-y-2 flex-1 justify-end ${
+            state.screen === "users" ? "" : "hidden"
+          }`}
+        ></div>
         <form
-          className="flex gap-3 mt-3"
+          className={`flex gap-3 mt-3 ${
+            state.screen === "messages" ? "" : "hidden"
+          }`}
           onSubmit={(e) => {
             e.preventDefault();
             dispatch({ type: "add_my_message" });
@@ -117,10 +152,12 @@ export default function ChatModal() {
         </form>
       </div>
       <div
-        className="p-4 rounded-lg cursor-pointer text-white bg-dark mix-blend-overlay"
-        onClick={() => dispatch({ type: "toggle_open", payload: !state.open })}
+        className="p-4 rounded-lg cursor-pointer text-white bg-dark shadow-lg"
+        onClick={() =>
+          dispatch({ type: "toggle_open", payload: !state.isModalOpen })
+        }
       >
-        {!state.open ? (
+        {!state.isModalOpen ? (
           <BsFillChatLeftDotsFill fontSize={26} />
         ) : (
           <RxCross2 fontSize={26} />
