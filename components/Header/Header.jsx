@@ -17,11 +17,8 @@ export default function HeaderWithoutSearch() {
   const router = useRouter();
 
   useEffect(() => {
-    if (token) {
-      return setLoggedIn(true);
-    } else {
-      return setLoggedIn(false);
-    }
+    if (token) return setLoggedIn(true);
+    return setLoggedIn(false);
   }, [token]);
 
   function logoutHandler() {
@@ -71,7 +68,7 @@ export default function HeaderWithoutSearch() {
           </div>
         </div>
       </header>
-      <div className="h-20 w-full relative bg-red" />
+      <div className="h-20 w-full relative" />
     </>
   );
 }
