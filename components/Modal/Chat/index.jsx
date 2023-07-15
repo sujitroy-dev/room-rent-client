@@ -1,9 +1,10 @@
-import { useEffect, useReducer, useState } from "react";
+import { use, useEffect, useReducer } from "react";
 import { BsFillChatLeftDotsFill } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
-import { RiMenu3Fill } from "react-icons/ri";
 import { IoMdSend } from "react-icons/io";
 import token from "@/services/auth";
+import Image from "next/image";
+import { MdClose, MdOutlineArrowBackIosNew } from "react-icons/md";
 
 export default function ChatModal() {
   const [state, dispatch] = useReducer(
@@ -63,22 +64,57 @@ export default function ChatModal() {
           ...state,
           screen: action.payload,
         };
+      } else if (action.type === "select_user") {
+        return {
+          ...state,
+          selectedUser: action.payload,
+        };
+      } else if (action.type === "clear_selected_user") {
+        return {
+          ...state,
+          selectedUser: {
+            ...state.selectedUser,
+            name: "All Chat",
+          },
+        };
       } else {
         return state;
       }
     },
     {
       isLoggedIn: false,
-      isModalOpen: true,
-      screen: "messages", // users, messages
+      isModalOpen: true, // todo: make it false
+      screen: "users", // options: users, messages
       messageInput: "",
       messages: [],
       users: [
         {
-          name: "Rajeev Das",
+          id: 1,
+          name: "Rajiv Gupta",
+          profile:
+            "https://res.cloudinary.com/doy9gcs3y/image/upload/v1681408017/icons/javascript-svgrepo-com-2_u9copz.svg",
           lastMessage: "Hey what's up ?",
+          time: "10 Days ago",
+        },
+        {
+          id: 2,
+          name: "Sujit Roy",
+          profile:
+            "https://res.cloudinary.com/doy9gcs3y/image/upload/v1681144363/profile_csaemb.webp",
+          lastMessage: "Hey what's up ?",
+          time: "10 Days ago",
+        },
+        {
+          id: 3,
+          name: "Saurab Das",
+          profile: "",
+          lastMessage: "Hey what's up ?",
+          time: "10 Days ago",
         },
       ],
+      selectedUser: {
+        name: "All Chat",
+      },
     }
   );
 
@@ -98,24 +134,39 @@ export default function ChatModal() {
           state.isModalOpen ? "" : "hidden"
         } mb-4 bg-gray-100 rounded-lg p-4 shadow-lg w-[400px] h-[500px] flex flex-col`}
       >
-        <header className="border-b border-gray-300 flex justify-start pb-2 mb-3">
-          <RiMenu3Fill
-            fontSize={20}
-            className="cursor-pointer"
-            onClick={() =>
-              dispatch({ type: "change_screen", payload: "users" })
-            }
-          />
+        <header className="border-b border-gray-300 flex justify-start pb-2 mb-3 items-center gap-3">
+          {state.screen !== "users" ? (
+            <MdOutlineArrowBackIosNew
+              fontSize={20}
+              className="cursor-pointer"
+              onClick={() => {
+                dispatch({ type: "change_screen", payload: "users" });
+                dispatch({ type: "clear_selected_user" });
+              }}
+            />
+          ) : (
+            <MdClose
+              fontSize={20}
+              className="cursor-pointer"
+              onClick={() => {
+                dispatch({ type: "toggle_open", payload: !state.isModalOpen });
+              }}
+            />
+          )}
+          <div className="">
+            <h5 className="font-semibold">{state.selectedUser.name}</h5>
+          </div>
         </header>
         <div
           className={`${
             state.screen === "messages" ? "" : "hidden"
-          } flex-1 overflow-y-auto`}
+          } flex-1 overflow-y-auto flex flex-col`}
         >
-          <div className="flex flex-col gap-y-2 justify-end h-full">
+          <div className="flex flex-col gap-y-2 justify-end flex-1">
             {state.messages.map((message) => (
               <span
-                className={`bg-gray-200 text-dark text-sm py-2 px-4 rounded-full ${
+                key={message.message}
+                className={`text-sm bg-gray-200 text-dark py-2 px-4 rounded-2xl ${
                   message.isMe ? "self-end" : "self-start"
                 }`}
               >
@@ -125,10 +176,53 @@ export default function ChatModal() {
           </div>
         </div>
         <div
-          className={`flex flex-col gap-y-2 flex-1 justify-end ${
+          className={`${
             state.screen === "users" ? "" : "hidden"
-          }`}
-        ></div>
+          } flex-1 overflow-y-auto`}
+        >
+          <div className="flex flex-col gap-y-2">
+            {state.users.map((user) => (
+              <div
+                key={user.id}
+                className="hover:bg-gray-200 p-3 rounded-lg flex gap-3 cursor-pointer"
+                onClick={() => {
+                  dispatch({ type: "change_screen", payload: "messages" });
+                  dispatch({ type: "select_user", payload: user });
+                }}
+              >
+                {user.profile === "" || !user.profile ? (
+                  <div className="flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-500 rounded-full">
+                    <span class="font-medium text-gray-200">
+                      {user.name.split(" ").length > 1
+                        ? `${user.name.split(" ")[0].split("")[0]}${
+                            user.name
+                              .split(" ")
+                              [user.name.split(" ").length - 1].split("")[0]
+                          }`
+                        : user.name.split("")[0].toUpperCase()}
+                    </span>
+                  </div>
+                ) : (
+                  <Image
+                    className="w-10 h-10 rounded-full"
+                    src={user.profile}
+                    width={100}
+                    height={100}
+                    alt={user.name}
+                  />
+                )}
+                <div className="flex flex-col w-full">
+                  <h4 className="text-sm font-medium text-gray-700">
+                    {user.name}
+                  </h4>
+                  <p className="truncate text-xs fotn-medium text-gray-700">
+                    {user.lastMessage}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
         <form
           className={`flex gap-3 mt-3 ${
             state.screen === "messages" ? "" : "hidden"
