@@ -4,7 +4,8 @@ import { RxCross2 } from "react-icons/rx";
 import { IoMdSend } from "react-icons/io";
 import token from "@/services/auth";
 import Image from "next/image";
-import { MdClose, MdOutlineArrowBackIosNew } from "react-icons/md";
+import { MdOutlineArrowBackIosNew } from "react-icons/md";
+import { io } from "socket.io-client";
 
 export default function ChatModal() {
   const [state, dispatch] = useReducer(
@@ -83,7 +84,7 @@ export default function ChatModal() {
     },
     {
       isLoggedIn: false,
-      isModalOpen: true, // todo: make it false
+      isModalOpen: false,
       screen: "users", // options: users, messages
       messageInput: "",
       messages: [],
@@ -123,6 +124,31 @@ export default function ChatModal() {
     return dispatch({ type: "update_login", payload: false });
   }, [token]);
 
+  useEffect(() => {
+    const socket = io("http://localhost:4000", {
+      autoConnect: false,
+      reconnect: true,
+      withCredentials: true,
+    });
+    socket.connect();
+
+    // socket.on("privateMessage", (data) => {
+    //   console.log("Received private message:", data);
+    //   // Handle the received message data
+    // });
+
+    return () => {
+      // socket.disconnect();
+    };
+  }, []);
+
+  const sendMessageToUserHandler = () => {
+    const recipientUserId = state.selectedUser.id;
+    const message = "Hello, user123!";
+
+    socket.emit("privateMessage", { recipient_id: recipientUserId, message });
+  };
+
   return (
     <div
       className={`fixed bottom-8 right-8 z-[2001] flex items-end flex-col ${
@@ -135,21 +161,13 @@ export default function ChatModal() {
         } mb-4 bg-gray-100 rounded-lg p-4 shadow-lg w-[400px] h-[500px] flex flex-col`}
       >
         <header className="border-b border-gray-300 flex justify-start pb-2 mb-3 items-center gap-3">
-          {state.screen !== "users" ? (
+          {state.screen !== "users" && (
             <MdOutlineArrowBackIosNew
               fontSize={20}
               className="cursor-pointer"
               onClick={() => {
                 dispatch({ type: "change_screen", payload: "users" });
                 dispatch({ type: "clear_selected_user" });
-              }}
-            />
-          ) : (
-            <MdClose
-              fontSize={20}
-              className="cursor-pointer"
-              onClick={() => {
-                dispatch({ type: "toggle_open", payload: !state.isModalOpen });
               }}
             />
           )}
@@ -192,7 +210,7 @@ export default function ChatModal() {
               >
                 {user.profile === "" || !user.profile ? (
                   <div className="flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-500 rounded-full">
-                    <span class="font-medium text-gray-200">
+                    <span className="font-medium text-gray-200">
                       {user.name.split(" ").length > 1
                         ? `${user.name.split(" ")[0].split("")[0]}${
                             user.name
