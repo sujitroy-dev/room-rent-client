@@ -4,7 +4,6 @@ import { getSingleRoom } from "@/services/apiClients/rooms";
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import Image from "next/image";
 import Slider from "react-slick";
-import { WishListButton } from "@/components/Rooms/RoomCard/RoomCard";
 import token from "@/services/auth";
 import { showLoginForm } from "@/redux/features/layout/layoutSlice";
 import { useDispatch } from "react-redux";
@@ -19,13 +18,17 @@ import { BiChat } from "react-icons/bi";
 import { useEffect, useRef, useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
 
-export default function RoomPage({ id }) {
+interface Props {
+  id: string;
+}
+
+export default function RoomPage({ id }: Props) {
   const { data: room } = useQuery(`room-${id}`, () => getSingleRoom(id));
 
-  const [nav1, setNav1] = useState(null);
-  const [nav2, setNav2] = useState(null);
-  const slider1Ref = useRef(null);
-  const slider2Ref = useRef(null);
+  const [nav1, setNav1] = useState<Slider | undefined>();
+  const [nav2, setNav2] = useState<Slider | undefined>();
+  const slider1Ref = useRef<any>();
+  const slider2Ref = useRef<any>();
 
   const settings = {
     dots: false,
@@ -59,13 +62,14 @@ export default function RoomPage({ id }) {
         <div className="grid grid-cols-5 gap-14 mb-20">
           <div className="col-span-3">
             <Slider {...settings} asNavFor={nav2} ref={slider1Ref}>
-              {room?.data?.pictures?.map((item) => {
+              {room?.data?.pictures?.map((picture: string) => {
                 return (
                   <Image
-                    src={room?.data?.pictures?.[0]}
+                    src={picture}
                     width={800}
                     height={800}
                     className="rounded-xl w-[800px] h-full"
+                    alt=""
                   />
                 );
               })}
@@ -84,13 +88,14 @@ export default function RoomPage({ id }) {
                 swipeToSlide
                 focusOnSelect
               >
-                {room?.data?.pictures?.map((item) => {
+                {room?.data?.pictures?.map((picture: string) => {
                   return (
                     <Image
-                      src={room?.data?.pictures?.[0]}
+                      src={picture}
                       width={800}
                       height={800}
                       className="rounded-xl w-[800px] h-full px-2 mt-5"
+                      alt=""
                     />
                   );
                 })}
@@ -217,6 +222,12 @@ export default function RoomPage({ id }) {
   );
 }
 
-RoomPage.getInitialProps = async ({ query }) => {
+interface RoomPageServerProps {
+  query: {
+    id: string;
+  };
+}
+
+RoomPage.getInitialProps = async ({ query }: RoomPageServerProps) => {
   return { id: query.id };
 };

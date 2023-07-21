@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./index.module.scss";
 import Head from "next/head";
 import WithoutSearchLayout from "@/layouts/Default";
-import { GoSearch } from "react-icons/go";
 import ListYourProperty from "@/components/ListYourProperty/ListYourProperty";
 import RecentlyListedRooms from "@/components/Rooms/RecentlyListedRooms";
 import FullFurnishedRooms from "@/components/Rooms/FullFurnishedRooms";
@@ -66,11 +65,6 @@ export default function Home(props) {
                   onClick={handleSearchSubmit}
                   className="bg-blue px-6 py-4 text-white font-medium"
                 >
-                  {/* <GoSearch
-                    size="35px"
-                    className={styles["search-icon"]}
-                    aria-label="search rooms"
-                  /> */}
                   Search
                 </button>
               </from>
