@@ -5,6 +5,24 @@ import styles from "./Rooms.module.scss";
 import RoomCard from "./RoomCard/RoomCard";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 
+interface room {
+  _id: string;
+  title: string;
+  rent_amount: number;
+  currency: string;
+  deposit: number;
+  security_amount: number;
+  postedTime: Date;
+  pictures: string[];
+  location: string;
+  apartment_type: string;
+  like: number | boolean;
+}
+interface Props {
+  header: string;
+  rooms: room[];
+}
+
 const settings = {
   dots: false,
   infinite: false,
@@ -191,8 +209,8 @@ const settings = {
   ],
 };
 
-export default function Rooms({ header, rooms = [] }) {
-  const CarouselRef = useRef(null);
+export default function Rooms({ header, rooms = [] }: Props) {
+  const CarouselRef = useRef<any>(null);
   return (
     <div className={styles.rooms}>
       <h2 className={styles.title}>{header}</h2>
@@ -211,7 +229,7 @@ export default function Rooms({ header, rooms = [] }) {
         </div>
         {rooms.length !== 0 ? (
           <Slider {...settings} ref={CarouselRef}>
-            {rooms.map((room) => (
+            {rooms.map((room: room) => (
               <RoomCard
                 key={room._id}
                 id={room._id}

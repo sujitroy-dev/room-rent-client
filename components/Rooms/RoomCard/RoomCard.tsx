@@ -8,6 +8,21 @@ import { toast } from "react-toastify";
 import token from "@/services/auth";
 import { dislikeRoom, likeRoom } from "@/services/apiClients/rooms";
 
+interface Props {
+  id: string;
+  title: string;
+  rent: number;
+  apartment_type: string;
+  currency: string;
+  deposit: number;
+  security: number;
+  postedTime: Date;
+  images: string | undefined;
+  location: string;
+  liked: number | boolean;
+  path: string;
+}
+
 export default function RoomCard({
   id,
   title,
@@ -20,7 +35,7 @@ export default function RoomCard({
   location,
   path = "/",
   liked = false,
-}) {
+}: Props) {
   return (
     <div className="p-5 bg-white shadow-md rounded-xl w-[300px] mb-3">
       <Link href={path}>
@@ -69,7 +84,12 @@ export default function RoomCard({
   );
 }
 
-export function WishListButton({ liked, id }) {
+interface WishlistButtonProps {
+  liked: number | boolean;
+  id: string;
+}
+
+export function WishListButton({ liked, id }: WishlistButtonProps) {
   const [isLiked, setLiked] = useState(liked);
   const dispatchGlob = useDispatch();
   const showAuthFormFunc = () => dispatchGlob(showLoginForm());
