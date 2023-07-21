@@ -1,7 +1,7 @@
 import Slider from "react-slick";
 import styles from "./Testimonials.module.scss";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import TestimonialCard from "./testimonial-card/TestimonialCard";
 import { useQuery } from "react-query";
 
@@ -27,17 +27,25 @@ const settings = {
         slidesToScroll: 1,
       },
     },
-  ]
+  ],
 };
 
+interface testimonial {
+  _id: string;
+  name: string;
+  designation: string;
+  user_pic: string;
+  message: string;
+}
+
 export default function Testimonials() {
-  const CarouselRef = useRef(null);
-  
+  const CarouselRef = useRef<any>(null);
+
   async function fetchRooms() {
     const response = await fetch(`${process.env.API_BASE}/testimonial`);
     return (await response).json();
   }
-  
+
   const { data: testimonials } = useQuery("testimonial", fetchRooms);
 
   return (
@@ -58,23 +66,25 @@ export default function Testimonials() {
         </div>
         {testimonials !== undefined ? (
           <Slider {...settings} ref={CarouselRef}>
-            {testimonials?.data.map((user) => {
+            {testimonials?.data.map((testimonial: testimonial) => {
               return (
                 <TestimonialCard
-                  key={user.message}
-                  name={user.name}
-                  designation={user.designation}
-                  image={user.user_pic}
-                  message={user.message}
+                  key={testimonial._id}
+                  name={testimonial.name}
+                  designation={testimonial.designation}
+                  image={testimonial.user_pic}
+                  message={testimonial.message}
                 />
               );
             })}
           </Slider>
-        ) :<Slider {...settings} ref={CarouselRef}>
+        ) : (
+          <Slider {...settings} ref={CarouselRef}>
             <TestimonialShimmerCard />
             <TestimonialShimmerCard />
             <TestimonialShimmerCard />
-          </Slider>}
+          </Slider>
+        )}
       </div>
     </div>
   );
