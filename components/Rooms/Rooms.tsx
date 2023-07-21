@@ -4,20 +4,7 @@ import Slider from "react-slick";
 import styles from "./Rooms.module.scss";
 import RoomCard from "./RoomCard/RoomCard";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
-
-interface room {
-  _id: string;
-  title: string;
-  rent_amount: number;
-  currency: string;
-  deposit: number;
-  security_amount: number;
-  postedTime: Date;
-  pictures: string[];
-  location: string;
-  apartment_type: string;
-  like: number | boolean;
-}
+import room from "@/types/room";
 interface Props {
   header: string;
   rooms: room[];

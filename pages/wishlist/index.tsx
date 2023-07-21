@@ -7,13 +7,11 @@ import {
   likeRoom,
   dislikeRoom,
 } from "@/services/apiClients/rooms";
-import Image from "next/image";
 import { AiFillHeart, AiFillStar, AiOutlineHeart } from "react-icons/ai";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { makeAuthFormVisible } from "@/redux/features/layout/layoutSlice";
-import token from "@/services/auth";
 import { toast } from "react-toastify";
+import room from "@/types/room";
 
 export default function Wishlist() {
   const { data: rooms } = useQuery("wishlist-rooms", getWishlist);
@@ -22,7 +20,7 @@ export default function Wishlist() {
     <WithoutSearchLayout>
       <div className="container m-auto">
         <div className={styles.wishlist}>
-          {rooms?.data?.map((room) => (
+          {rooms?.data?.map((room: room) => (
             <RoomCard
               key={room._id}
               id={room._id}
@@ -45,10 +43,14 @@ export default function Wishlist() {
   );
 }
 
-function WishListButton({ liked, id }) {
+interface WishlistButtonProps {
+  liked: number | boolean;
+  id: string;
+}
+
+function WishListButton({ liked, id }: WishlistButtonProps) {
   const [isLiked, setLiked] = useState(liked);
   const dispatchGlob = useDispatch();
-  const showAuthFormFunc = () => dispatchGlob(makeAuthFormVisible());
 
   async function likeFunction() {
     const data = await likeRoom(id);
@@ -70,7 +72,6 @@ function WishListButton({ liked, id }) {
   }
 
   function handleLikeDislike() {
-    if (!token) return showAuthFormFunc();
     if (isLiked) return dislikeFunction();
     return likeFunction();
   }
