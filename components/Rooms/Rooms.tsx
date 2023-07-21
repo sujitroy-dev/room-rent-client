@@ -5,6 +5,24 @@ import styles from "./Rooms.module.scss";
 import RoomCard from "./RoomCard/RoomCard";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 
+interface room {
+  _id: string;
+  title: string;
+  rent_amount: number;
+  currency: string;
+  deposit: number;
+  security_amount: number;
+  postedTime: Date;
+  pictures: string[];
+  location: string;
+  apartment_type: string;
+  like: number | boolean;
+}
+interface Props {
+  header: string;
+  rooms: room[];
+}
+
 const settings = {
   dots: false,
   infinite: false,
@@ -191,13 +209,13 @@ const settings = {
   ],
 };
 
-export default function Rooms({ header, rooms = [] }) {
-  const CarouselRef = useRef(null);
+export default function Rooms({ header, rooms = [] }: Props) {
+  const CarouselRef = useRef<any>(null);
   return (
     <div className={styles.rooms}>
       <h2 className={styles.title}>{header}</h2>
       <div className={`${styles.rooms__container} container`}>
-      <div
+        <div
           className={styles["prev-slide-btn"]}
           onClick={() => CarouselRef?.current?.slickPrev()}
         >
@@ -209,31 +227,34 @@ export default function Rooms({ header, rooms = [] }) {
         >
           <GrLinkNext />
         </div>
-        {(rooms.length !==0)?<Slider {...settings} ref={CarouselRef}>
-              {rooms.map((room) => (
-                <RoomCard
-                  key={room._id}
-                  id={room._id}
-                  title={room.title}
-                  rent={room.rent_amount}
-                  currency={room.currency}
-                  deposit={room.deposit}
-                  security={room.security_amount}
-                  postedTime={room.postedTime}
-                  images={room.pictures?.[0]}
-                  location={room.location}
-                  apartment_type={room.apartment_type}
-                  path={`/room/${room._id}`}
-                  liked={room.like}
-                />
-              ))}
-        </Slider>:
-        <Slider {...settings} ref={CarouselRef}>
+        {rooms.length !== 0 ? (
+          <Slider {...settings} ref={CarouselRef}>
+            {rooms.map((room: room) => (
+              <RoomCard
+                key={room._id}
+                id={room._id}
+                title={room.title}
+                rent={room.rent_amount}
+                currency={room.currency}
+                deposit={room.deposit}
+                security={room.security_amount}
+                postedTime={room.postedTime}
+                images={room.pictures?.[0]}
+                location={room.location}
+                apartment_type={room.apartment_type}
+                path={`/room/${room._id}`}
+                liked={room.like}
+              />
+            ))}
+          </Slider>
+        ) : (
+          <Slider {...settings} ref={CarouselRef}>
             <ShimmerRoomCard />
             <ShimmerRoomCard />
             <ShimmerRoomCard />
             <ShimmerRoomCard />
-        </Slider>}
+          </Slider>
+        )}
       </div>
     </div>
   );
