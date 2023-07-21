@@ -11,7 +11,7 @@ import { AiFillHeart } from "react-icons/ai";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
-export default function HeaderWithoutSearch() {
+export default function Header() {
   const dispatch = useDispatch();
   const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
   const router = useRouter();
