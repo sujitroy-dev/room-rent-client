@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 interface state {
-    isLoggedIn: boolean;
+    isLoggedin: boolean;
 }
 
 const initialState: state = {
-    isLoggedIn: false,
+    isLoggedin: false,
 }
 
 export const authSlice = createSlice({
@@ -13,7 +13,7 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         updateLoginStatus: (state, action) => {
-            return { isLoggedIn: action.payload };
+            return { isLoggedin: action.payload };
         },
     },
 })
