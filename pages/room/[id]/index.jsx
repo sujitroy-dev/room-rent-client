@@ -6,7 +6,7 @@ import Image from "next/image";
 import Slider from "react-slick";
 import { WishListButton } from "@/components/Rooms/RoomCard/RoomCard";
 import token from "@/services/auth";
-import { showLoginForm } from "@/redux/features/layout/layoutSlice.js";
+import { showLoginForm } from "@/redux/features/layout/layoutSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import SimilarListedRooms from "@/components/Rooms/SimilarRooms";

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { showLoginForm } from "@/redux/features/layout/layoutSlice.js";
+import { showLoginForm } from "@/redux/features/layout/layoutSlice";
 import { AiFillHeart, AiFillStar, AiOutlineHeart } from "react-icons/ai";
 import { useState } from "react";
 import { toast } from "react-toastify";

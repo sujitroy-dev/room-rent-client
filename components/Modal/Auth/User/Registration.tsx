@@ -1,19 +1,33 @@
 "use client";
-import { useReducer } from "react";
+import { FormEvent, useReducer } from "react";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { hideAuthForm } from "@/redux/features/layout/layoutSlice.js";
+import { hideAuthForm } from "@/redux/features/layout/layoutSlice";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { motion } from "framer-motion";
 
-const initialForm = {
+interface State {
+  name: string;
+  email: string;
+  password: string;
+  user_type: string;
+}
+interface Action {
+  type: string;
+  payload?: any;
+}
+interface Props {
+  changeFormTypeFunc: () => void;
+}
+
+const initialForm: State = {
   name: "",
   email: "",
   password: "",
   user_type: "customer",
 };
-const reducer = (state, action) => {
+const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "update_name":
       return { ...state, name: action.payload };
@@ -29,7 +43,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
-export default function RegistrationModal({ changeFormTypeFunc }) {
+export default function RegistrationModal({ changeFormTypeFunc }: Props) {
   const router = useRouter();
 
   const [formState, dispatch] = useReducer(reducer, initialForm);
@@ -58,7 +72,7 @@ export default function RegistrationModal({ changeFormTypeFunc }) {
       console.log(error);
     }
   };
-  const submitRegistrationForm = (e) => {
+  const submitRegistrationForm = (e: FormEvent) => {
     e.preventDefault();
     submitForm();
   };
@@ -162,7 +176,7 @@ export default function RegistrationModal({ changeFormTypeFunc }) {
         Already Registiered?{" "}
         <span
           className="font-medium underline"
-          onClick={() => changeFormTypeFunc("login")}
+          onClick={() => changeFormTypeFunc()}
         >
           Login
         </span>

@@ -1,20 +1,29 @@
-import { useState } from "react";
+import React, { FC, useState } from "react";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { hideAuthForm } from "@/redux/features/layout/layoutSlice.js";
+import { hideAuthForm } from "@/redux/features/layout/layoutSlice";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { motion } from "framer-motion";
 
-export default function LoginModal({ changeFormTypeFunc }) {
+interface Props {
+  changeFormTypeFunc: () => void;
+}
+
+const LoginModal: FC<Props> = ({ changeFormTypeFunc }) => {
   const router = useRouter();
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const dispatchGlob = useDispatch();
   const hideAuthFormFunc = () => dispatchGlob(hideAuthForm());
 
-  const submitForm = async (url, formData) => {
+  interface loginCredentials {
+    email: string;
+    password: string;
+  }
+
+  const submitForm = async (url: string, formData: loginCredentials) => {
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -30,12 +39,12 @@ export default function LoginModal({ changeFormTypeFunc }) {
         return hideAuthFormFunc();
       }
       return toast.error(responseData.message);
-    } catch (error) {
+    } catch (error: any) {
       toast.error(error.message);
     }
   };
 
-  function submitLoginForm(event) {
+  function submitLoginForm(event: React.FormEvent) {
     event.preventDefault();
     const url = `${process.env.API_BASE}/user/login`;
 
@@ -103,11 +112,13 @@ export default function LoginModal({ changeFormTypeFunc }) {
         Not Registered yet?{" "}
         <span
           className="font-medium underline"
-          onClick={() => changeFormTypeFunc("register")}
+          onClick={() => changeFormTypeFunc()}
         >
           Register
         </span>
       </p>
     </motion.div>
   );
-}
+};
+
+export default LoginModal;

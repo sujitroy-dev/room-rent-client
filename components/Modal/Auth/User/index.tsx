@@ -2,18 +2,26 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   showRegistierForm,
   showLoginForm,
-} from "@/redux/features/layout/layoutSlice.js";
-import { hideAuthForm } from "@/redux/features/layout/layoutSlice.js";
+} from "@/redux/features/layout/layoutSlice";
+import { hideAuthForm } from "@/redux/features/layout/layoutSlice";
 import LoginForm from "./Login";
 import RegistierForm from "./Registration";
 import { AnimatePresence } from "framer-motion";
 
+interface state {
+  layout: {
+    authFormVisible: boolean;
+    authFormType: string;
+  };
+}
 export default function UserAuthModal() {
   const dispatch = useDispatch();
-  const isAuthFormVisible = useSelector(
-    (state) => state.layout.authFormVisible
+  const isAuthFormVisible: boolean = useSelector(
+    (state: state) => state.layout.authFormVisible
   );
-  const authFormType = useSelector((state) => state.layout.authFormType);
+  const authFormType: string = useSelector(
+    (state: state) => state.layout.authFormType
+  );
   const hideAuthFormFunc = () => dispatch(hideAuthForm());
 
   return (
@@ -26,13 +34,11 @@ export default function UserAuthModal() {
           />
           {authFormType === "register" && (
             <RegistierForm
-              formType={authFormType}
               changeFormTypeFunc={() => dispatch(showLoginForm())}
             />
           )}
           {authFormType === "login" && (
             <LoginForm
-              formType={authFormType}
               changeFormTypeFunc={() => dispatch(showRegistierForm())}
             />
           )}

@@ -1,6 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { CaseReducer, createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+interface state {
+  authFormVisible: boolean;
+  authFormType: string;
+}
+
+const initialState: state = {
   authFormVisible: false,
   authFormType: "register" // register || login
 }

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Footer.module.scss";
 import Link from "next/link";
 import { HiPhone, HiOutlineMail } from "react-icons/hi";
-import { MdLocationPin } from 'react-icons/md';
+import { MdLocationPin } from "react-icons/md";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   return (

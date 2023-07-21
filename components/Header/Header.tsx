@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import {
   showRegistierForm,
   showLoginForm,
-} from "@/redux/features/layout/layoutSlice.js";
+} from "@/redux/features/layout/layoutSlice";
 import token from "@/services/auth";
 import { AiFillHeart } from "react-icons/ai";
 import Cookies from "js-cookie";
@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 
 export default function HeaderWithoutSearch() {
   const dispatch = useDispatch();
-  const [isLoggedIn, setLoggedIn] = useState(null);
+  const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
