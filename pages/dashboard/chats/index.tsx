@@ -52,14 +52,10 @@ export default function ChatPage() {
             ))}
           </ul>
         </div>
-        <div
-          className={`py-4 px-6 flex-1 bg-slate-100 ${
-            selectedUser === "" ? "flex items-center justify-center" : ""
-          }`}
-        >
+        <div className={"py-4 px-6 flex-1 bg-slate-100"}>
           {selectedUser === "" ? (
             <div className="flex flex-col text-center gap-4">
-              <h1 className="text-6xl font-semibold text-slate-300">
+              <h1 className="text-6xl font-semibold text-slate-300 mt-80">
                 Chat Preview
               </h1>
               <p className="text-slate-400 text-lg">
