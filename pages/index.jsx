@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import styles from "./index.module.scss";
 import Head from "next/head";
-import WithoutSearchLayout from "@/layouts/Default";
+import DefaultLayout from "@/layouts/Default";
 import ListYourProperty from "@/components/ListYourProperty/ListYourProperty";
 import RecentlyListedRooms from "@/components/Rooms/RecentlyListedRooms";
 import FullFurnishedRooms from "@/components/Rooms/FullFurnishedRooms";
@@ -42,7 +42,7 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <WithoutSearchLayout>
+        <DefaultLayout>
           <section className={styles["hero-section"]}>
             <div className="container m-auto">
               <h2 className="text-6xl text-center text-white font-bold my-14">
@@ -76,7 +76,7 @@ export default function Home(props) {
           <SemiFurnishedRooms />
           <NoneFurnishedRooms />
           <Testimonials />
-        </WithoutSearchLayout>
+        </DefaultLayout>
       </main>
     </>
   );

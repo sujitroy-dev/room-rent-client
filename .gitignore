@@ -30,3 +30,7 @@ Thumbs.db
 /.cache
 .next.cache
 .next-server
+
+
+.env
+dev.db*
