@@ -4,12 +4,14 @@ import { useState } from "react";
 export default function ChatPage() {
   const users = [
     {
+      id: 1,
       name: "Curtis Collier",
       picture: null,
       last_mesage: "okay bye 👋🏻",
       last_message_time: "10:23 PM",
     },
     {
+      id: 2,
       name: "Jack Greer",
       picture: null,
       last_mesage: "Hey, what's up! ",
@@ -25,6 +27,7 @@ export default function ChatPage() {
           <ul className="flex flex-col gap-2">
             {users.map((user) => (
               <li
+                key={user.id}
                 className={`py-3 px-4 rounded-lg flex items-center justify-center transition-all duration-200 cursor-pointer ${
                   user.name === selectedUser ? "bg-slate-100 shadow-sm" : ""
                 }`}
