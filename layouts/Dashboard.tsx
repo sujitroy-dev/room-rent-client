@@ -10,7 +10,7 @@ export default function DashboardLayout({ children }: Props) {
       <div className="flex flex-1 overflow-hidden">
         <Sidebar />
         <div className="flex-1 overflow-y-auto">
-          <div className="py-4 px-6">{children}</div>
+          <div className="">{children}</div>
         </div>
       </div>
     </div>

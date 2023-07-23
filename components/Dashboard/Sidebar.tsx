@@ -28,7 +28,7 @@ export default function DashboardSidebar() {
   return (
     <div className="w-80 h-screen px-5 py-4 bg-slate-800 overflow-y-auto flex flex-col">
       <Link
-        href="/"
+        href="/dashboard"
         className="block mb-6 text-3xl font-semibold text-slate-200"
       >
         Room Rent
