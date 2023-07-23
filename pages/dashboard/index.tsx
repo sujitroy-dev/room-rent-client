@@ -1,4 +1,5 @@
 import DashboardLayout from "@/layouts/Dashboard";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function DashboardPage() {
@@ -41,6 +42,7 @@ export default function DashboardPage() {
         <div className="grid grid-cols-2 gap-6">
           {properties.map((propertie) => (
             <Card
+              key={propertie.id}
               id={propertie.id}
               picture={propertie.picture}
               title={propertie.title}
@@ -69,7 +71,7 @@ type CardProps = {
 function Card({ id, picture, title, status, type, rent, security }: CardProps) {
   return (
     <div className="flex gap-5 bg-slate-200 p-5 rounded-lg hover:shadow-lg">
-      <img
+      <Image
         src={picture}
         alt="apartment picture"
         className="w-48 h-48 rounded-lg"

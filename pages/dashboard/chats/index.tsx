@@ -1,4 +1,5 @@
 import DashboardLayout from "@/layouts/Dashboard";
+import Image from "next/image";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { IoMdSend } from "react-icons/io";
 
@@ -216,7 +217,7 @@ export default function ChatPage() {
                 onClick={() => setselectedUser(user)}
               >
                 {user.picture ? (
-                  <img
+                  <Image
                     className="w-12 h-12 rounded-full overflow-hidden mr-3"
                     src={user.picture}
                     alt=""
@@ -253,7 +254,7 @@ export default function ChatPage() {
             <div className="h-screen flex flex-col overflow-hidden">
               <header className="py-4 px-8 shadow-md w-full overflow-x-hidden flex gap-4 items-center bg-white">
                 {selectedUser.picture ? (
-                  <img
+                  <Image
                     className="w-12 h-12 rounded-full overflow-hidden"
                     src={selectedUser.picture}
                     alt=""
@@ -275,6 +276,7 @@ export default function ChatPage() {
               >
                 {messages.map((message, index) => (
                   <li
+                    key={message.id}
                     className={`bg-slate-200 px-4 py-3 text-slate-800 ${
                       message.isMe ? "rounded-s-3xl" : "rounded-e-3xl"
                     }

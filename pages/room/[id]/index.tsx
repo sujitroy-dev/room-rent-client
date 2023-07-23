@@ -65,6 +65,7 @@ export default function RoomPage({ id }: Props) {
               {room?.data?.pictures?.map((picture: string) => {
                 return (
                   <Image
+                    key={picture}
                     src={picture}
                     width={800}
                     height={800}
@@ -91,6 +92,7 @@ export default function RoomPage({ id }: Props) {
                 {room?.data?.pictures?.map((picture: string) => {
                   return (
                     <Image
+                      key={picture}
                       src={picture}
                       width={800}
                       height={800}

@@ -38,15 +38,17 @@ export default function RoomCard({
 }: Props) {
   return (
     <div className="p-5 bg-white shadow-md rounded-xl w-[300px] mb-3">
-      <Link href={path}>
-        <Image
-          src={images}
-          width={300}
-          height={175}
-          alt={title}
-          className="rounded-md mb-2.5 w-full h-[173px]"
-        />
-      </Link>
+      {images && (
+        <Link href={path}>
+          <Image
+            src={images}
+            width={300}
+            height={175}
+            alt={title}
+            className="rounded-md mb-2.5 w-full h-[173px]"
+          />
+        </Link>
+      )}
       <h6 className="text-md font-medium mb-3 truncate" title={title}>
         <Link href={path}>{title}</Link>
       </h6>
