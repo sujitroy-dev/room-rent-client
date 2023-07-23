@@ -260,6 +260,8 @@ export default function ChatPage() {
                     className="w-12 h-12 rounded-full overflow-hidden"
                     src={selectedUser.picture}
                     alt=""
+                    width={48}
+                    height={48}
                   />
                 ) : (
                   <span className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center font-semibold text-lg bg-purple-200 text-purple-600 uppercase">
@@ -283,50 +285,26 @@ export default function ChatPage() {
                     ${message.isMe ? "rounded-s-3xl" : "rounded-e-3xl"}
                     max-w-[45%] ${message.isMe ? "self-end" : "self-start"}
                     ${
-                      !message.isMe && index === 0
-                        ? "rounded-tl-3xl"
-                        : "rouned-tl-sm"
-                    }
-                    ${
-                      !message.isMe && index !== 0 && !messages[index - 1]?.isMe
+                      !message.isMe && !messages[index - 1]?.isMe
                         ? "rounded-tl-sm"
                         : "rounded-tl-3xl"
                     }
                     ${
-                      !message.isMe && index === messages.length - 1
-                        ? "rounded-bl-3xl"
-                        : "rounded-bl-sm"
+                      message.isMe && messages[index - 1]?.isMe
+                        ? "rounded-tr-sm"
+                        : "rounded-tr-3xl"
                     }
                     ${
-                      !message.isMe &&
-                      index !== messages.length &&
-                      !messages[index + 1]?.isMe
+                      !message.isMe && !messages[index + 1]?.isMe
                         ? "rounded-bl-sm"
                         : "rounded-bl-3xl"
                     }
                     ${
-                      message.isMe && index === 0
-                        ? "rounded-tr-3xl"
-                        : "rouned-tr-sm"
+                      message.isMe && messages[index + 1]?.isMe
+                        ? "rounded-br-sm"
+                        : "rounded-br-3xl"
                     }
-                    ${
-                      message.isMe && index !== 0 && messages[index - 1]?.isMe
-                        ? "rounded-tr-sm"
-                        : "rounded-tr-3xl"
-                    }
-                      ${
-                        // message.isMe && index === messages.length - 1
-                        //   ? "rounded-br-3xl"
-                        //   : "rounded-br-sm"
-                        ""
-                      }
-                        ${
-                          message.isMe &&
-                          index !== messages.length &&
-                          messages?.[index + 1]?.isMe
-                            ? "rounded-br-sm"
-                            : "rounded-br-3xl"
-                        }
+                    
                      `}
                   >
                     {message.message}
