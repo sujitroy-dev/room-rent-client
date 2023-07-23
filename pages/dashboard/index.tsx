@@ -75,6 +75,8 @@ function Card({ id, picture, title, status, type, rent, security }: CardProps) {
         src={picture}
         alt="apartment picture"
         className="w-48 h-48 rounded-lg"
+        width={200}
+        height={200}
       />
       <div className="flex-1 overflow-hidden">
         <Link
