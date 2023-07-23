@@ -27,7 +27,7 @@ export default function DashboardPage() {
     {
       id: 3,
       picture:
-        "https://res.cloudinary.com/doy9gcs3y/image/upload/v1684685795/Room-rent-assets/properties/property1_nkb87h.webp",
+        "https://res.cloudinary.com/doy9gcs3y/image/upload/v1684741177/Room-rent-assets/properties/property9_u182ow.webp",
       title: "1BHK Beautiful property in Beltola guwahati",
       status: "booked",
       type: "1BHK",
