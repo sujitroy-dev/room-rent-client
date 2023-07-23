@@ -221,6 +221,8 @@ export default function ChatPage() {
                     className="w-12 h-12 rounded-full overflow-hidden mr-3"
                     src={user.picture}
                     alt=""
+                    width={48}
+                    height={48}
                   />
                 ) : (
                   <span className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center font-semibold text-lg bg-purple-200 text-purple-600 mr-3 uppercase">
@@ -277,9 +279,8 @@ export default function ChatPage() {
                 {messages.map((message, index) => (
                   <li
                     key={message.id}
-                    className={`bg-slate-200 px-4 py-3 text-slate-800 ${
-                      message.isMe ? "rounded-s-3xl" : "rounded-e-3xl"
-                    }
+                    className={`bg-slate-200 px-4 py-3 text-slate-800 
+                    ${message.isMe ? "rounded-s-3xl" : "rounded-e-3xl"}
                     max-w-[45%] ${message.isMe ? "self-end" : "self-start"}
                     ${
                       !message.isMe && index === 0
@@ -303,9 +304,6 @@ export default function ChatPage() {
                         ? "rounded-bl-sm"
                         : "rounded-bl-3xl"
                     }
-
-
-
                     ${
                       message.isMe && index === 0
                         ? "rounded-tr-3xl"
