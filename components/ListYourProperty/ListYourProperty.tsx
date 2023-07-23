@@ -46,7 +46,13 @@ export default function ListYourProperty() {
   );
 }
 
-function ListCard({ number, title, subtitle }) {
+type ListCardProps = {
+  number: number;
+  title: string;
+  subtitle: string;
+};
+
+function ListCard({ number, title, subtitle }: ListCardProps) {
   return (
     <div className={styles["step-card"]}>
       <div className={styles.count}>{number}</div>
