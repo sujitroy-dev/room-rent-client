@@ -1,7 +1,13 @@
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import InputField from "@/components/InputFields";
 import DashboardLayout from "@/layouts/Dashboard";
-import React, { useState, useMemo, ReactNode } from "react";
+import React, {
+  useState,
+  useMemo,
+  ReactNode,
+  useReducer,
+  ReducerWithoutAction,
+} from "react";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import { BiCurrentLocation } from "react-icons/bi";
@@ -14,6 +20,39 @@ import {
   roomOptions,
 } from "@/data/options";
 
+type TAction = {
+  type: string;
+  payload?: any;
+};
+type TInitialState = {
+  propertyType: string;
+};
+const initialState: TInitialState = {
+  propertyType: "",
+};
+
+const breadcrumbNavigation = [
+  {
+    title: "Dashboard",
+    path: "/dashboard",
+  },
+  {
+    title: "Edit",
+    path: "",
+  },
+  {
+    title: "Room",
+  },
+];
+const reducer = (state: TInitialState, action: TAction) => {
+  if (action.type === "fire") {
+    console.log("hey fired me!");
+    return {
+      propertyType: "hello",
+    };
+  }
+  throw Error("Unknown action.");
+};
 export default function PropertyEditPage() {
   const ReactQuill = useMemo(
     () => dynamic(() => import("react-quill"), { ssr: false }),
@@ -22,19 +61,8 @@ export default function PropertyEditPage() {
   const [name, setName] = useState<string | number>("Sujit");
   const [description, setDescription] = useState("");
 
-  const breadcrumbNavigation = [
-    {
-      title: "Dashboard",
-      path: "/dashboard",
-    },
-    {
-      title: "Edit",
-      path: "",
-    },
-    {
-      title: "Room",
-    },
-  ];
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   function getGeoLocation() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
@@ -59,6 +87,7 @@ export default function PropertyEditPage() {
 
   return (
     <DashboardLayout>
+      <button onClick={() => dispatch({ type: "fire" })}>Fire🔥</button>
       <div className="py-4 px-6">
         <h1 className="text-3xl font-semibold mt-1">View Room</h1>
         <Breadcrumb navigations={breadcrumbNavigation} spacing="small" />
