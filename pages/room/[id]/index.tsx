@@ -55,10 +55,23 @@ export default function RoomPage({ id }: Props) {
     setNav1(slider1Ref.current);
     setNav2(slider2Ref.current);
   }, []);
+  const breadcrumbNavigation = [
+    {
+      title: "Home",
+      path: "/",
+    },
+    {
+      title: "Search",
+      path: "/search",
+    },
+    {
+      title: "Room",
+    },
+  ];
   return (
     <WithoutSearchLayout>
       <div className="container m-auto">
-        <Breadcrumb />
+        <Breadcrumb navigations={breadcrumbNavigation} spacing="medium" />
         <div className="grid grid-cols-5 gap-14 mb-20">
           <div className="col-span-3">
             <Slider {...settings} asNavFor={nav2} ref={slider1Ref}>
