@@ -29,15 +29,18 @@ export default function SelectField(Props: Props) {
         className={`px-4 py-2 rounded-lg outline-slate-700 mt-1 ${
           variant === "default" ? "bg-slate-100" : "border-2 border-slate-300"
         }`}
-        onChange={
-          updateValue
-            ? (e: React.ChangeEvent<HTMLSelectElement>): void =>
-                updateValue(e.target.value)
-            : () => {}
-        }
+        onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => {
+          if (!updateValue) return;
+          updateValue(e.target.value);
+        }}
       >
+        <option value="select" key="select">
+          Select
+        </option>
         {options.map((option) => (
-          <option value={option.value}>{option.title}</option>
+          <option value={option.value} key={option.value}>
+            {option.title}
+          </option>
         ))}
       </select>
     </label>
