@@ -6,6 +6,8 @@ import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import { BiCurrentLocation } from "react-icons/bi";
 import Button from "@/components/Button";
+import SelectField from "@/components/SelectField";
+import { propertyOptions, furnishingOptions } from "@/data/options";
 
 export default function PropertyEditPage() {
   const ReactQuill = useMemo(
@@ -57,17 +59,16 @@ export default function PropertyEditPage() {
         <Breadcrumb navigations={breadcrumbNavigation} spacing="small" />
         <form className="">
           <DetailsSection header="Property Details">
-            <InputField
-              type="text"
+            <SelectField
               label="Property type"
-              value={name}
               required={true}
               variant="outlined"
               placeholder="Ex. Apartment, House, etc."
-              updateValue={({ name, value }) => setName(value)}
+              updateValue={(value: string): void => console.log(value)}
+              options={propertyOptions}
             />
             <InputField
-              type="text"
+              type="number"
               label="Area (sqft)"
               value={name}
               required={true}
@@ -75,18 +76,17 @@ export default function PropertyEditPage() {
               placeholder="Ex. 500"
               updateValue={({ name, value }) => setName(value)}
             />
-            <InputField
-              type="text"
+            <SelectField
               label="Furnishing"
-              value={name}
               required={true}
               variant="outlined"
-              placeholder="Ex. Furnished, Semi-Furnished, Unfurnished"
-              updateValue={({ name, value }) => setName(value)}
+              placeholder="Ex. Apartment, House, etc."
+              updateValue={(value: string): void => console.log(value)}
+              options={furnishingOptions}
             />
             <InputField
               type="text"
-              label="Rent"
+              label="Rent Amount"
               value={name}
               required={true}
               variant="outlined"
@@ -95,7 +95,7 @@ export default function PropertyEditPage() {
             />
             <InputField
               type="text"
-              label="Security"
+              label="Security Amount"
               value={name}
               required={true}
               variant="outlined"
@@ -103,7 +103,7 @@ export default function PropertyEditPage() {
             />
             <InputField
               type="text"
-              label="Agreement"
+              label="Agreement Charge"
               value={name}
               required={true}
               variant="outlined"
@@ -169,21 +169,19 @@ export default function PropertyEditPage() {
               variant="outlined"
               updateValue={({ name, value }) => setName(value)}
             />
-            <InputField
-              type="text"
+            <SelectField
               label="State"
-              value={name}
               required={true}
               variant="outlined"
-              updateValue={({ name, value }) => setName(value)}
+              updateValue={(value: string): void => console.log(value)}
+              options={[{ title: "Assam", value: "assam" }]}
             />
-            <InputField
-              type="text"
-              label="State"
-              value={name}
+            <SelectField
+              label="District"
               required={true}
               variant="outlined"
-              updateValue={({ name, value }) => setName(value)}
+              updateValue={(value: string): void => console.log(value)}
+              options={[{ title: "Nagaon", value: "nagaon" }]}
             />
             <InputField
               type="text"
