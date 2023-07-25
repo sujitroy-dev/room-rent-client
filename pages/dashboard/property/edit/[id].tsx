@@ -5,9 +5,14 @@ import React, { useState, useMemo, ReactNode } from "react";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import { BiCurrentLocation } from "react-icons/bi";
+import { RiDeleteBin5Line } from "react-icons/ri";
 import Button from "@/components/Button";
 import SelectField from "@/components/SelectField";
-import { propertyOptions, furnishingOptions } from "@/data/options";
+import {
+  propertyOptions,
+  furnishingOptions,
+  roomOptions,
+} from "@/data/options";
 
 export default function PropertyEditPage() {
   const ReactQuill = useMemo(
@@ -120,14 +125,18 @@ export default function PropertyEditPage() {
               </label>
             </div>
           </DetailsSection>
+
           <DetailsSection header="Rooms Detail">
-            <div className="col-span-2"></div>
+            <div className="col-span-2">
+              <RoomDetailsComponent />
+            </div>
             <div className="col-span-2 flex justify-center">
               <Button variant="ghost" onClick={addNewRoomForm} type="button">
                 <span className="font-medium">New room</span>
               </Button>
             </div>
           </DetailsSection>
+
           <DetailsSection header="Location Details">
             <InputField
               type="text"
@@ -243,6 +252,37 @@ function DetailsSection({ children, header }: DetailsSectionProps) {
           {header}
         </h2>
         <div className="pt-3 pb-5 px-5 grid grid-cols-2 gap-3">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+type RoomDetailsComponentProps = {};
+function RoomDetailsComponent(Props: RoomDetailsComponentProps) {
+  return (
+    <div className="rounded-xl border-2 border-slate-300">
+      <div className="bg-slate-200 py-3 px-5 rounded-t-xl flex items-center justify-end">
+        <RiDeleteBin5Line
+          className="text-red cursor-pointer"
+          fontSize="1.2rem"
+        />
+      </div>
+      <div className="pt-3 pb-5 px-5 grid grid-cols-2 gap-3">
+        <SelectField
+          label="Room type"
+          required={true}
+          variant="outlined"
+          updateValue={(value: string): void => console.log(value)}
+          options={roomOptions}
+        />
+        <InputField
+          type="number"
+          label="Room Size (sqft)"
+          value={"name"}
+          variant="outlined"
+          placeholder="Ex. 500"
+          updateValue={({ name, value }) => console.log(value)}
+        />
       </div>
     </div>
   );

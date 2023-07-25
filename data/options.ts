@@ -24,4 +24,51 @@ const furnishingOptions = [
 
 ]
 
-export { propertyOptions, furnishingOptions };
+const roomOptions = [
+    {
+        "title": "Bedroom",
+        "value": "bedroom"
+    },
+    {
+        "title": "Bathroom",
+        "value": "bathroom"
+    },
+    {
+        "title": "Kitchen",
+        "value": "kitchen"
+    },
+    {
+        "title": "Living Room",
+        "value": "living room"
+    },
+    {
+        "title": "Dining Room",
+        "value": "dining room"
+    },
+    {
+        "title": "Guest Room",
+        "value": "guest room"
+    },
+    {
+        "title": "Home Office/Study",
+        "value": "home office/study"
+    },
+    {
+        "title": "Laundry Room",
+        "value": "laundry room"
+    },
+    {
+        "title": "Playroom",
+        "value": "playroom"
+    },
+    {
+        "title": "Gym/Fitness Room",
+        "value": "gym/fitness room"
+    },
+    {
+        "title": "Library",
+        "value": "library"
+    },
+];
+
+export { propertyOptions, furnishingOptions, roomOptions };
