@@ -71,7 +71,7 @@ export default function RoomPage({ id }: Props) {
   return (
     <WithoutSearchLayout>
       <div className="container m-auto">
-        <Breadcrumb navigations={breadcrumbNavigation} />
+        <Breadcrumb navigations={breadcrumbNavigation} spacing="medium" />
         <div className="grid grid-cols-5 gap-14 mb-20">
           <div className="col-span-3">
             <Slider {...settings} asNavFor={nav2} ref={slider1Ref}>

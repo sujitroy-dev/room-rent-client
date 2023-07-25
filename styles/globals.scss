@@ -5,13 +5,13 @@
 // custom utility classes
 @import "./custom-utility.scss";
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-@import './customize.scss';
-@import './ShimmerEffect.scss';
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+@import "./customize.scss";
+@import "./ShimmerEffect.scss";
 :root {
   --max-width: 1250px;
   --border-radius: 12px;
-  --primary-font: 'Montserrat', sans-serif;
+  --primary-font: "Montserrat", sans-serif;
 
   // --darkest-blue: #03045E;
   // --dark-blue: #0077B6;
@@ -40,4 +40,10 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

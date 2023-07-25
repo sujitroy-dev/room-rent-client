@@ -6,11 +6,20 @@ type navigation = {
 };
 type Props = {
   navigations: navigation[];
+  spacing: string;
 };
 
-export default function Breadcrumb({ navigations = [] }: Props) {
+export default function Breadcrumb({
+  navigations = [],
+  spacing = "medium",
+}: Props) {
   return (
-    <nav className="flex py-10" aria-label="Breadcrumb">
+    <nav
+      className={`flex ${
+        spacing === "small" ? "py-6" : spacing === "medium" ? "py-10" : "py-14"
+      }`}
+      aria-label="Breadcrumb"
+    >
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
         {navigations.map((navigation: navigation, index: number) => (
           <li key={navigation.title + index}>

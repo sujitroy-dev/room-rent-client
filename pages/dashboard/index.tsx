@@ -71,13 +71,15 @@ type CardProps = {
 function Card({ id, picture, title, status, type, rent, security }: CardProps) {
   return (
     <div className="flex gap-5 bg-slate-200 p-5 rounded-lg hover:shadow-lg">
-      <Image
-        src={picture}
-        alt="apartment picture"
-        className="w-48 h-48 rounded-lg"
-        width={200}
-        height={200}
-      />
+      <Link href={`/dashboard/property/view/${id}`}>
+        <Image
+          src={picture}
+          alt="apartment picture"
+          className="w-48 h-48 rounded-lg"
+          width={200}
+          height={200}
+        />
+      </Link>
       <div className="flex-1 overflow-hidden">
         <Link
           href={`/dashboard/property/view/${id}`}
