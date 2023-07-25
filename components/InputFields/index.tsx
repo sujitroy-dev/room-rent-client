@@ -22,6 +22,7 @@ export default function InputField(Props: Props) {
     placeholder = "",
     updateValue,
   } = Props;
+
   return (
     <label className="flex flex-col" {...Props}>
       <span>
@@ -30,21 +31,16 @@ export default function InputField(Props: Props) {
       </span>
       <input
         className={`px-4 py-2 rounded-lg outline-slate-700 mt-1 ${
-          variant === "default"
-            ? "bg-slate-100"
-            : variant === "outlined"
-            ? "border-2 border-slate-300"
-            : ""
+          variant === "default" ? "bg-slate-100" : "border-2 border-slate-300"
         }`}
         type={type}
         value={value}
         required={required}
         placeholder={placeholder}
-        onChange={({ target }) =>
-          updateValue
-            ? updateValue({ name: target.name, value: target.value })
-            : () => {}
-        }
+        onChange={({ target }) => {
+          if (!updateValue) return;
+          updateValue({ name: target.name, value: target.value });
+        }}
       />
     </label>
   );
