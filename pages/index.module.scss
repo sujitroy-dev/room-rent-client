@@ -46,25 +46,23 @@
   // }
 }
 
-
 @media screen and (max-width: 1430px) {
-  .hero-section{
+  .hero-section {
     background-position: center center;
     background-repeat: no-repeat;
   }
 }
 @media screen and (max-width: 768px) {
-  .search{
+  .search {
     margin: 0 22px;
   }
 }
 
-
 @media screen and (max-width: 480px) {
-  .hero-section{
+  .hero-section {
     padding-top: 170px;
   }
-  .hero-section__title{
+  .hero-section__title {
     font-size: 3.2rem;
     margin-bottom: 40px;
   }

@@ -1,0 +1,121 @@
+// .description {
+//   /* Styles for the main heading */
+//   h1 {
+//     font-size: 28px;
+//     font-weight: bold;
+//     margin-bottom: 20px;
+//   }
+
+//   /* Styles for the subsection headings */
+//   h2 {
+//     font-size: 24px;
+//     font-weight: bold;
+//     margin-top: 30px;
+//     margin-bottom: 15px;
+//   }
+
+//   /* Styles for paragraphs */
+//   p {
+//     font-size: 16px;
+//     line-height: 1.5;
+//     margin-bottom: 15px;
+//   }
+
+//   /* Styles for emphasized text */
+//   strong {
+//     font-weight: bold;
+//   }
+
+//   /* Styles for the image */
+//   img {
+//     max-width: 100%;
+//     height: auto;
+//     display: block;
+//     margin-bottom: 20px;
+//   }
+
+//   /* Styles for the unordered list */
+//   ul {
+//     font-size: 16px;
+//     line-height: 1.5;
+//     list-style-type: disc;
+//     margin-left: 30px;
+//     margin-bottom: 20px;
+//   }
+
+//   /* Styles for the list items */
+//   li {
+//     margin-bottom: 5px;
+//   }
+
+//   /* Styles for the link */
+//   a {
+//     color: #007bff;
+//     text-decoration: none;
+//   }
+
+//   /* Styles for the link on hover */
+//   a:hover {
+//     text-decoration: underline;
+//   }
+// }
+
+.description {
+  /* Headings */
+  h1 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 25px 0 10px;
+  }
+
+  /* Paragraphs */
+  p {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  /* Emphasized Text */
+  strong {
+    font-weight: bold;
+  }
+
+  /* Image */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  /* Unordered List */
+  ul {
+    font-size: 14px;
+    line-height: 1.4;
+    list-style-type: disc;
+    margin-left: 25px;
+    margin-bottom: 15px;
+  }
+
+  /* List Items */
+  li {
+    margin-bottom: 5px;
+  }
+
+  /* Links */
+  a {
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  /* Links on Hover */
+  a:hover {
+    text-decoration: underline;
+  }
+}
